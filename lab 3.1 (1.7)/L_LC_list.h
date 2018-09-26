@@ -1,12 +1,13 @@
 #pragma once
 #include "L_LC.h"
-
+#include<thread>
+using std::function;
 template<typename T>
 class L_list :public L_CL<T>
 {
 public:
 	//конструктори
-	L_list() { Size = 0; head = tail = el_n = nullptr; }
+	L_list() { Size = 0; /*el_n = */head = tail = nullptr; }
 
 	//спільні
 	bool add_L(T d);
@@ -15,6 +16,7 @@ public:
 	void del_i_L(int k);
 	int search_el(T d);
 	T search_i_el(int k);
+	int search_first(function<bool(T)> f);
 
 	//деструктор
 	~L_list() {
@@ -39,7 +41,7 @@ private:
 	};
 
 	int count;//к-ть елементів зара
-	Node<T> *el_n;//в даний момент часу
+	//Node<T> *el_n;//в даний момент часу
 	Node<T> *head;//голова
 	Node<T> *tail;//хвіст
 	
@@ -55,7 +57,7 @@ bool L_list<T>::add_L(T d)
 		tail = head;
 		tail->data = d;
 		tail->next = tail;
-		el_n = head;
+		//el_n = head;
 		return true;
 	}
 	else
@@ -133,4 +135,16 @@ T L_list<T>::search_i_el(int k)
 		tmp = tmp->next;
 	}
 	return tmp->data;
+}
+
+template<typename T>
+int L_list<T>::search_first(function<bool(T)> f)
+{
+	Node<T> *tmp = head;
+	for (int i = 0; i < count; i++)
+	{
+
+		if (f(tmp->data)) return i;
+	}
+	return -1;
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "L_LC.h"
-
+#include<thread>
+using std::function;
 template<typename T>
 class L_arr :public L_CL<T>
 {
@@ -16,6 +17,7 @@ public:
 	void del_i_L(int k);
 	int search_el(T d);
 	T search_i_el(int k);
+	int search_first(function<bool(T)> f);
 	
 	//деструктор
 	~L_arr() { delete data[]; }
@@ -97,6 +99,16 @@ int L_arr<T> ::search_el(T d)
 template<typename T>
 T L_arr<T>::search_i_el(int k)
 {
-	if (k<count) return data[k];
+	if (k < count&&k >= 0) return data[k];
 	return nullptr;
+}
+
+template<typename T>
+int L_arr<T>::search_first(function<bool(T)> f)
+{
+	for (int i = 0; i < count; i++)
+	{
+		if (f(data[i])) return i;
+	}
+	return -1;
 }
