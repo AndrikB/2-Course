@@ -6,7 +6,7 @@ using std::function;
 using std::vector;
 
 template<typename T>
-class L_vector :public L_vector<T>
+class L_vector :public L_CL<T>
 {
 public:
 	//конструктори
@@ -46,7 +46,7 @@ bool L_vector<T>::add_head(T d)
 template<typename T>
 int L_vector<T>::size()
 {
-	return data.size();
+	return (int) data.size();
 }
 
 template<typename T>
@@ -64,7 +64,7 @@ void L_vector<T>::del_i(int k)
 template<typename T>
 int  L_vector<T>::search_el(T d)
 {
-	int s = data.size;
+	int s = (int) data.size();
 	for (int i = 0; i < s; i++)
 	{
 		if (d == data[i])
@@ -76,14 +76,14 @@ int  L_vector<T>::search_el(T d)
 template<typename T>
 T L_vector<T>::search_by_index(int k)
 {
-	if (k < data.size&&k >= 0) return data[k];
-	return nullptr;
+	if (k < data.size()&&k >= 0) return data[k];
+	return (T) nullptr;
 }
 
 template<typename T>
 int L_vector<T>::search_first_with (function<bool(T)> f)
 {
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < size(); i++)
 	{
 		if (f(data[i])) return i;
 	}

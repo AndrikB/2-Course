@@ -7,14 +7,15 @@
 #include "L_CL.h"
 
 #include<thread>
+#include<typeinfo>
 using std::function;
 
-/*enum MODE
+enum MODE
 {
 	arr,
 	list,
-	vector	
-};*/
+	Vector	
+};
 
 template<typename T>
 class List :public L_CL<T>
@@ -29,7 +30,7 @@ public:
 			impl = new L_arr<T>;
 		this->mode = MODE::arr;
 	}
-	//void set_mode(int mode);
+	void set_mode(int mode);
 	bool add_tail(T d);
 	bool add_head(T d);
 	int size();
@@ -40,15 +41,15 @@ public:
 	int search_first_with (function<bool(T)> f);
 
 private:
-	//MODE mode = arr;
+	MODE mode = arr;
 	int SIZE = 0;
 	L_CL<T>*impl;
 };
 
-/*template<typename T>
+template<typename T>
 void List<T>::set_mode(int mode)
 {
-	delete &impl;
+	delete impl;
 
 	if (mode == 1)
 	{
@@ -67,9 +68,9 @@ void List<T>::set_mode(int mode)
 	else 
 	{
 		impl = new L_vector<T>;
-		this->mode = MODE::vector;
+		this->mode = MODE::Vector;
 	}
-}*/
+}
 
 template<typename T>
 bool List<T>::add_tail(T d)

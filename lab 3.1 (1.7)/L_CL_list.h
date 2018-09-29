@@ -7,7 +7,7 @@ class L_list :public L_CL<T>
 {
 public:
 	//конструктори
-	L_list() { Size = 0; /*el_n = */head = tail = nullptr; }
+	L_list() { count = 0; /*el_n = */head = tail = nullptr; }
 
 	//спільні
 	bool add_tail(T d)override;
@@ -89,8 +89,8 @@ bool L_list<T>::add_head(T d)
 	{
 		Node<T> *tmp = new Node<T>;
 		tmp->next = head;
+		tmp->data = d;
 		head = tmp;
-		head->data = d;
 		tail->next = head;
 		return true;
 	}
@@ -112,29 +112,31 @@ void L_list<T>::clean()
 	{
 		tail = head;
 		head = head->next;
-		delete &tail;
+		delete tail;
 	}
+	count = 0;
+	delete head;
+	head = tail = nullptr;
 }
 
 template<typename T>
 void L_list<T>::del_i(int k)
 {
 	Node<T> *tmp = head;
-	if (k >= size || k < 0) return;
-	size--;
+	if (k >= count || k < 0) return;
+	count--;
 	if (k == 0)
 	{
 		head = head->next;
-		delete &tmp;
+		delete tmp;
 		return;
 	}
 	for (int i = 1; i < k; i++)
-	{
-		tmp = tmp->next;
-		Node<T> *tmp2 = tmp->next;
-		tmp->next = tmp->next->next;
-		delete &tmp2;
-	}
+	tmp = tmp->next;
+	Node<T> *tmp2 = tmp->next;
+	tmp->next = tmp->next->next;
+	delete tmp2;
+	
 }
 
 template<typename T>
@@ -146,7 +148,7 @@ int L_list<T>::search_el(T d)
 	{
 		if (tmp->data == d) return j;
 		tmp = tmp->next;
-		if (j > size) return -1;
+		if (j > count) return -1;
 		j++;
 	}
 	return -1;
@@ -156,8 +158,8 @@ template<typename T>
 T L_list<T>::search_by_index(int k)
 {
 	Node<T> *tmp = head;
-	if (k >= size || k < 0) return nullptr;
-	for (int i = 1; i < k; i++)
+	if (k >= count || k < 0) return (T) nullptr;
+	for (int i = 0; i < k; i++)
 	{
 		tmp = tmp->next;
 	}
@@ -172,6 +174,7 @@ int L_list<T>::search_first_with (function<bool(T)> f)
 	{
 
 		if (f(tmp->data)) return i;
+		tmp = tmp->next;
 	}
 	return -1;
 }
