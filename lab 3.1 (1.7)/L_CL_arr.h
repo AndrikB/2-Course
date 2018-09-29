@@ -1,5 +1,5 @@
 #pragma once
-#include "L_LC.h"
+#include "L_CL.h"
 #include<thread>
 using std::function;
 template<typename T>
@@ -11,16 +11,17 @@ public:
 	L_arr(int length);
 	
 	//спільні
-	bool add_L(T d);
-	int size();
-	void del_all_L();
-	void del_i_L(int k);
-	int search_el(T d);
-	T search_i_el(int k);
-	int search_first(function<bool(T)> f);
+	bool add_tail(T d)override;
+	bool add_head(T d)override;
+	int size()override;
+	void clean()override;
+	void del_i(int k)override;
+	int search_el(T d)override;
+	T search_by_index(int k)override;
+	int search_first_with (function<bool(T)> f)override;
 	
 	//деструктор
-	~L_arr() { delete data[]; }
+	~L_arr() { delete[] data; }
 	//////////////
 private:
 	T *data = nullptr;// масив
@@ -54,27 +55,39 @@ int L_arr<T>::size()
 }
 
 template<typename T>
-bool L_arr<T>::add_L(T d)
+bool L_arr<T>::add_tail(T d)
 {
-	if (count == Max) return false;
+	if (count == Max-1) return false;
 	data[count] = d;
 	count++;
 	return true;
 }
 
 template<typename T>
-void L_arr<T>::del_all_L() 
+bool L_arr<T>::add_head(T d)
+{
+	if (count == Max-1) return false;
+	
+	for (int i = count; i > 0; i--)
+		data[i] = data[i - 1];
+	data[0] = d;
+	count++;
+	return true;
+}
+
+template<typename T>
+void L_arr<T>::clean() 
 {
 	index = 0;
 	while (count > 0)
 	{
 		count--;
-		data[count] = nullptr;
+		data[count] = (T)nullptr;
 	}
 }
 
 template<typename T>
-void L_arr<T>::del_i_L(int k)
+void L_arr<T>::del_i(int k)
 {
 	if (k >= count) return;
 	for (int j = k; j < count; j++)
@@ -97,14 +110,14 @@ int L_arr<T> ::search_el(T d)
 }
 
 template<typename T>
-T L_arr<T>::search_i_el(int k)
+T L_arr<T>::search_by_index(int k)
 {
 	if (k < count&&k >= 0) return data[k];
-	return nullptr;
+	return (T)nullptr;
 }
 
 template<typename T>
-int L_arr<T>::search_first(function<bool(T)> f)
+int L_arr<T>::search_first_with (function<bool(T)> f)
 {
 	for (int i = 0; i < count; i++)
 	{

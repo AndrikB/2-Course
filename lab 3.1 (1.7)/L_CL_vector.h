@@ -1,5 +1,5 @@
 #pragma once
-#include "L_LC.h"
+#include "L_CL.h"
 #include <vector>
 #include<thread>
 using std::function;
@@ -13,13 +13,14 @@ public:
 	
 
 	//спільні
-	bool add_L(T d);
-	int size();
-	void del_all_L();
-	void del_i_L(int k);
-	int search_el(T d);
-	T search_i_el(int k);
-
+	bool add_tail(T d)override;
+	bool add_head(T d)override;
+	int size()override;
+	void clean()override;
+	void del_i(int k)override;
+	int search_el(T d)override;
+	T search_by_index(int k)override;
+	int search_first_with (function<bool(T)> f)override;
 	//деструктор
 
 	/////////////////
@@ -29,9 +30,16 @@ private:
 };
 
 template<typename T>
-bool L_vector<T>::add_L(T d) 
+bool L_vector<T>::add_tail(T d) 
 {
 	data.push_back(d);
+	return true;
+}
+
+template<typename T>
+bool L_vector<T>::add_head(T d)
+{
+	data.insert(data.begin(), d);
 	return true;
 }
 
@@ -42,13 +50,13 @@ int L_vector<T>::size()
 }
 
 template<typename T>
-void L_vector<T>::del_all_L()
+void L_vector<T>::clean()
 {
 	data.clear();
 }
 
 template<typename T>
-void L_vector<T>::del_i_L(int k)
+void L_vector<T>::del_i(int k)
 {
 	data.erase(data.begin() + k);
 }
@@ -66,14 +74,14 @@ int  L_vector<T>::search_el(T d)
 }
 
 template<typename T>
-T L_vector<T>::search_i_el(int k)
+T L_vector<T>::search_by_index(int k)
 {
 	if (k < data.size&&k >= 0) return data[k];
 	return nullptr;
 }
 
 template<typename T>
-int L_arr<T>::search_first(function<bool(T)> f)
+int L_vector<T>::search_first_with (function<bool(T)> f)
 {
 	for (int i = 0; i < count; i++)
 	{

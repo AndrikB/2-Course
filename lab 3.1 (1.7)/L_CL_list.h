@@ -1,5 +1,5 @@
 #pragma once
-#include "L_LC.h"
+#include "L_CL.h"
 #include<thread>
 using std::function;
 template<typename T>
@@ -10,13 +10,14 @@ public:
 	L_list() { Size = 0; /*el_n = */head = tail = nullptr; }
 
 	//спільні
-	bool add_L(T d);
-	int size();
-	void del_all_L();
-	void del_i_L(int k);
-	int search_el(T d);
-	T search_i_el(int k);
-	int search_first(function<bool(T)> f);
+	bool add_tail(T d)override;
+	bool add_head(T d)override;
+	int size()override;
+	void clean()override;
+	void del_i(int k)override;
+	int search_el(T d)override;
+	T search_by_index(int k)override;
+	int search_first_with (function<bool(T)> f) override;
 
 	//деструктор
 	~L_list() {
@@ -48,12 +49,12 @@ private:
 };
 
 template<typename T>
-bool L_list<T>::add_L(T d)
+bool L_list<T>::add_tail(T d)
 {
 	count++;
 	if (!head) 
 	{
-		head = new Node;
+		head = new Node<T>;
 		tail = head;
 		tail->data = d;
 		tail->next = tail;
@@ -62,7 +63,7 @@ bool L_list<T>::add_L(T d)
 	}
 	else
 	{
-		tail->next = new Node;
+		tail->next = new Node<T>;
 		tail = tail->next;
 		tail->data = d;
 		tail->next = head;
@@ -72,13 +73,39 @@ bool L_list<T>::add_L(T d)
 }
 
 template<typename T>
+bool L_list<T>::add_head(T d)
+{
+	count++;
+	if (!head)
+	{
+		head = new Node<T>;
+		tail = head;
+		tail->data = d;
+		tail->next = tail;
+		//el_n = head;
+		return true;
+	}
+	else
+	{
+		Node<T> *tmp = new Node<T>;
+		tmp->next = head;
+		head = tmp;
+		head->data = d;
+		tail->next = head;
+		return true;
+	}
+
+
+}
+
+template<typename T>
 int L_list<T>::size()
 {
 	return count;
 }
 
 template<typename T>
-void L_list<T>::del_all_L()
+void L_list<T>::clean()
 {
 	tail->next = nullptr;
 	while (head->next) 
@@ -90,7 +117,7 @@ void L_list<T>::del_all_L()
 }
 
 template<typename T>
-void L_list<T>::del_i_L(int k)
+void L_list<T>::del_i(int k)
 {
 	Node<T> *tmp = head;
 	if (k >= size || k < 0) return;
@@ -126,7 +153,7 @@ int L_list<T>::search_el(T d)
 }
 
 template<typename T>
-T L_list<T>::search_i_el(int k)
+T L_list<T>::search_by_index(int k)
 {
 	Node<T> *tmp = head;
 	if (k >= size || k < 0) return nullptr;
@@ -138,7 +165,7 @@ T L_list<T>::search_i_el(int k)
 }
 
 template<typename T>
-int L_list<T>::search_first(function<bool(T)> f)
+int L_list<T>::search_first_with (function<bool(T)> f)
 {
 	Node<T> *tmp = head;
 	for (int i = 0; i < count; i++)
