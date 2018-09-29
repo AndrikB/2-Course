@@ -1,6 +1,14 @@
 #pragma once
 #include<thread>
 using std::function;
+
+enum MODE
+{
+	arr,
+	list,
+	Vector
+};
+
 template<typename T>
 class L_CL
 {

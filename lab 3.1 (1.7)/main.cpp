@@ -6,6 +6,7 @@
 #include "L_CL.h"
 
 #include "List.h"
+#include "Cycle_List.h"
 
 #include <functional>
 #include<thread>
@@ -31,8 +32,8 @@ bool b(int d)
 
 int main()
 {
-	List<int> L;
-//	L.set_mode(3);
+	Cycle_List<int> L;
+	L.set_mode(3);
 
 	cout << L.add_tail(5)<<' ';
 	cout << L.add_head(14) << ' ';

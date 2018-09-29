@@ -11,12 +11,13 @@
 using std::function;
 
 
+
 template<typename T>
-class List :public L_CL<T>
+class Cycle_List :public L_CL<T>
 {
 public:
-	List() { impl = new L_arr<T>; }
-	List(int size) 
+	Cycle_List() { impl = new L_arr<T>; }
+	Cycle_List(int size)
 	{
 		if (SIZE > 0)
 			impl = new L_arr<T>(SIZE);
@@ -32,7 +33,7 @@ public:
 	void del_i(int i);
 	int search_el(T d);
 	T search_by_index(int i);
-	int search_first_with (function<bool(T)> f);
+	int search_first_with(function<bool(T)> f);
 
 private:
 	MODE mode = arr;
@@ -41,7 +42,7 @@ private:
 };
 
 template<typename T>
-void List<T>::set_mode(int mode)
+void Cycle_List<T>::set_mode(int mode)
 {
 	delete impl;
 
@@ -52,14 +53,14 @@ void List<T>::set_mode(int mode)
 		else
 			impl = new L_arr<T>;
 		this->mode = MODE::arr;
-		
+
 	}
 	else if (mode == 2)
 	{
 		impl = new L_list<T>;
 		this->mode = MODE::list;
 	}
-	else 
+	else
 	{
 		impl = new L_vector<T>;
 		this->mode = MODE::Vector;
@@ -67,50 +68,50 @@ void List<T>::set_mode(int mode)
 }
 
 template<typename T>
-bool List<T>::add_tail(T d)
+bool Cycle_List<T>::add_tail(T d)
 {
 	return impl->add_tail(d);
 }
 
 template<typename T>
-bool List<T>::add_head(T d)
+bool Cycle_List<T>::add_head(T d)
 {
 	return impl->add_head(d);
 }
 
 template<typename T>
-int List<T>::size()
+int Cycle_List<T>::size()
 {
 	return impl->size();
 }
 
 template<typename T>
-void List<T>::clean()
+void Cycle_List<T>::clean()
 {
 	impl->clean();
 }
 
 template<typename T>
-void List<T>::del_i(int k)
+void Cycle_List<T>::del_i(int k)
 {
 	impl->del_i(k);
 }
 
 template<typename T>
-int List<T>::search_el(T d)
+int Cycle_List<T>::search_el(T d)
 {
 	return impl->search_el(d);
 }
 
 template<typename T>
-T List<T>::search_by_index(int i)
+T Cycle_List<T>::search_by_index(int i)
 {
-	return impl->search_by_index(i);
+	return impl->search_by_index(i%size());
 }
 
 template<typename T>
-int  List<T>::search_first_with (function<bool(T)> f)
+int  Cycle_List<T>::search_first_with(function<bool(T)> f)
 {
-	return impl->search_first_with (f);
+	return impl->search_first_with(f);
 }
 
