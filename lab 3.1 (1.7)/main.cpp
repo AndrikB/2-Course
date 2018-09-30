@@ -75,50 +75,50 @@ bool b(T d)
 
 int main()
 {
-	//Cycle_List<int> L;
-	//L.set_mode(3);
-	//
-	//cout << L.add_tail(5)<<' ';
-	//cout << L.add_head(14) << ' ';
-	//cout << L.add_tail(24) << ' ';
-	//cout << L.add_head(105) << ' ';
-	//cout << L.size() << endl << endl;
-	//
-	//
-	//cout << L.search_by_index(L.search_first_with (b<int>)) << endl << endl;
-	//cout << L.search_by_index(0) << ' '
-	//	<< L.search_by_index(1) << ' '
-	//	<< L.search_by_index(2) << ' '
-	//	<< L.search_by_index(3) << ' '
-	//	<< L.search_by_index(4) << ' '
-	//	<< L.search_by_index(5) << endl << endl << endl;
-	//L.clean();
-	//
-	//cout << L.add_tail(5) << ' ';
-	//cout << L.add_head(14) << ' ';
-	//cout << L.add_tail(24) << ' ';
-	//cout << L.add_head(105) << ' ';
-	//cout << L.size() << endl << endl;
-	//
-	//
-	//cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
-	//
-	//L.del_i(L.search_first_with(b<int>));
-	//cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
-	//cout << L.search_by_index(0) << ' '
-	//	<< L.search_by_index(1) << ' '
-	//	<< L.search_by_index(2) << ' '
-	//	<< L.search_by_index(3) << ' '
-	//	<< L.search_by_index(4) << ' '
-	//	<< L.search_by_index(5) << endl;
-
-	Date d(-2018, 12, 31	, 1, 1, 1);
-	//cout << d.is_correct()<<' ';
-	//cout << d.weekday()
-	cout << endl;
-	d.make_correct();
+	Cycle_List<int> L;
+	L.set_mode(3);
 	
-	cout_weekday(d.weekday());
+	cout << L.add_tail(5)<<' ';
+	cout << L.add_head(14) << ' ';
+	cout << L.add_tail(24) << ' ';
+	cout << L.add_head(105) << ' ';
+	cout << L.size() << endl << endl;
+	
+	
+	cout << L.search_by_index(L.search_first_with (b<int>)) << endl << endl;
+	cout << L.search_by_index(0) << ' '
+		<< L.search_by_index(1) << ' '
+		<< L.search_by_index(2) << ' '
+		<< L.search_by_index(3) << ' '
+		<< L.search_by_index(4) << ' '
+		<< L.search_by_index(5) << endl << endl << endl;
+	L.clean();
+	
+	cout << L.add_tail(5) << ' ';
+	cout << L.add_head(14) << ' ';
+	cout << L.add_tail(24) << ' ';
+	cout << L.add_head(105) << ' ';
+	cout << L.size() << endl << endl;
+	
+	
+	cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
+	
+	L.del_i(L.search_first_with(b<int>));
+	cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
+	cout << L.search_by_index(0) << ' '
+		<< L.search_by_index(1) << ' '
+		<< L.search_by_index(2) << ' '
+		<< L.search_by_index(3) << ' '
+		<< L.search_by_index(4) << ' '
+		<< L.search_by_index(5) << endl;
+
+	//Date d(-2018, 12, 31	, 1, 1, 1);
+	//cout << d.is_correct()<<' ';
+	//cout << d.weekday();
+	cout << endl;
+	//d.make_correct();
+	
+	//cout_weekday(d.weekday());
 
 
 

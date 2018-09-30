@@ -4,6 +4,7 @@
 #include<thread>
 using std::function;
 using std::vector;
+using std::iterator;
 
 template<typename T>
 class L_vector :public L_CL<T>
@@ -21,11 +22,19 @@ public:
 	int search_el(T d)override;
 	T search_by_index(int k)override;
 	int search_first_with (function<bool(T)> f)override;
+
+	//iter
+	//void set_iter();
+	//bool add_iter();
+	//bool add_iter(int i);
 	//деструктор
 
 	/////////////////
 private:
+
 	vector<T> data;
+
+	
 
 };
 
@@ -53,6 +62,7 @@ template<typename T>
 void L_vector<T>::clean()
 {
 	data.clear();
+	it = nullptr;
 }
 
 template<typename T>
@@ -89,3 +99,26 @@ int L_vector<T>::search_first_with (function<bool(T)> f)
 	}
 	return -1;
 }
+
+//template<typename T>
+//void L_vector<T>::set_iter()
+//{
+//	it = data.begin();
+//}
+//
+//template<typename T>
+//bool L_vector<T>::add_iter()
+//{
+//	if (it+1 >= data.end)return false;
+//	it++;
+//	return true;
+//}
+//
+//template<typename T>
+//bool L_vector<T>::add_iter(int i)
+//{
+//	if (it + i > data.end) return false;
+//	if (it + i < data.begin) return false;
+//	it = it + i;
+//	return true;
+//}

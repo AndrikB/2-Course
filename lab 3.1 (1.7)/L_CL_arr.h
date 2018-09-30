@@ -10,7 +10,7 @@ public:
 	L_arr();
 	L_arr(int length);
 	
-	//ρο³λόν³
+	//ρο³λόν³ 
 	bool add_tail(T d)override;
 	bool add_head(T d)override;
 	int size()override;

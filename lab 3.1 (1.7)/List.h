@@ -38,6 +38,8 @@ private:
 	MODE mode = arr;
 	int SIZE = 0;
 	L_CL<T>*impl;
+
+
 };
 
 template<typename T>
