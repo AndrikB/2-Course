@@ -7,7 +7,7 @@
 #include "L_CL.h"
 
 #include<thread>
-#include<typeinfo>
+
 using std::function;
 
 
