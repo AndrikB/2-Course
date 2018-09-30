@@ -1,9 +1,8 @@
 #include "Date.h"
 
-bool Date::is_intercalary()
+bool intercalary(int y)
 {
-	int y = year;
-	if (y < 0)y = 1 - year;//it is for BC year
+	if (y < 0)y = 1 - y;//it is for BC year
 
 	if (y % 400 == 0)
 		return true;
@@ -12,8 +11,18 @@ bool Date::is_intercalary()
 	if (y % 4 == 0)
 		return true;
 	 return false;
+}
 
-		
+bool Date::is_intercalary()
+{
+	return intercalary(year);
+}
+
+int day_in_month(int year, int month)
+{
+	if (month == 2) return 28 + intercalary(year);//feb
+	if (month == 4 || month == 6 || month == 9 || month == 11) return 30;//apr, june, sep, nov
+	return 31;
 }
 
 bool Date::is_correct() 
@@ -21,20 +30,9 @@ bool Date::is_correct()
 	if (hour > 23 || minute > 59 || second > 59 || hour < 0 || minute < 0 || second < 0) return false;
 	if (month > 12 || month< 0) return false;
 	if (day < 0) return false;
-	if (month == 2)//feb
-		if (day > 28 + this->is_intercalary())
-			return false;
-		else return true;
 
-	if (month==4|| month == 6 || month == 9 || month == 11)//apr, june, sep, nov
-		if (day >30)
-			return false;
-		else return true;
-
-	if (day > 31)
-		return false;
-	else
-		return true;
+	if (day > day_in_month(year, month))return false;
+	else return true;
 }
 
 void Date::make_correct()
@@ -81,4 +79,35 @@ void Date::make_correct()
 
 	} 
 	
+}
+
+int Date::weekday() 
+{
+	if (!this->is_correct()) return -1;
+	int count = 1;
+	if (year > 0)
+	{
+		for (int i = 1; i < year; i++)
+			if (intercalary(i))count += 2;//in intercalary years weekday shifts on 2 days
+			else count+=1;
+		
+		for (int i = 1; i < month; i++)
+			count += day_in_month(year, i);
+		count = count + day - 1;
+		
+
+	}
+	else 
+	{
+		return -1;
+		//for (int i = -1; i > year; i--)
+		//	if (intercalary(i))count -= 2;//in intercalary years weekday shifts on 2 days
+		//	else count -= 1;
+		//
+		//for (int i = 1; i < month; i++)
+		//	count -= day_in_month(year, i);
+		//count = count - day + 1;
+		//
+	}
+	return count;
 }

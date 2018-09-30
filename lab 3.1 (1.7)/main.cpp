@@ -2,6 +2,7 @@
 #include "L_CL_arr.h"
 #include "L_CL_list.h"
 #include "L_CL_vector.h"
+#include <string>
 
 #include "L_CL.h"
 
@@ -15,6 +16,47 @@
 using std::cout;
 using std::endl;
 using std::function;
+using std::string;
+
+
+
+void cout_weekday(int count)
+{
+	if (count < 0)
+	{
+		cout << "The date isnt correct" << endl;
+		return;
+	}
+	Cycle_List<string> WeekDay;
+
+	WeekDay.add_tail("Sunday");
+	WeekDay.add_tail("Monday");
+	WeekDay.add_tail("Tuesday");
+	WeekDay.add_tail("Wednesday");
+	WeekDay.add_tail("Thursday");
+	WeekDay.add_tail("Friday");
+	WeekDay.add_tail("Saturday");
+	
+
+	cout << WeekDay.search_by_index(count) << endl;
+
+	//count = count % 7;
+	//switch (count)
+	//{												
+	//case 1: cout << "Monday"; break; 
+	//case 2: cout << "Tuesday"; break;
+	//case 3: cout << "Wednesday"; break;
+	//case 4: cout << "Thursday"; break;
+	//case 5: cout << "Friday"; break; 
+	//case 6: cout << "Saturday"; break;
+	//case 0: cout << "Sunday"; break;
+	//default:
+	//	cout << "The date isnt correct";
+	//	break;
+	//}
+	//cout << endl;
+}
+
 
 template <typename T>
 bool b(T d)
@@ -70,10 +112,16 @@ int main()
 	//	<< L.search_by_index(4) << ' '
 	//	<< L.search_by_index(5) << endl;
 
-	Date d(2019, 14, 75, 1, 1, 1);
-	cout << d.is_correct();
+	Date d(-2018, 12, 31	, 1, 1, 1);
+	//cout << d.is_correct()<<' ';
+	//cout << d.weekday()
+	cout << endl;
 	d.make_correct();
 	
+	cout_weekday(d.weekday());
+
+
+
 	system("pause");
 	return 0;
 }

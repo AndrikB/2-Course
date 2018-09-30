@@ -26,9 +26,10 @@ public:
 	bool is_correct();
 	bool is_intercalary();
 	void make_correct();
+	int weekday();
 
 private:
 	int year, month, day, hour, minute, second;
-	
+	//int day_in_month()
 
 };
