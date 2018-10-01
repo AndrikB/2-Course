@@ -11,22 +11,44 @@ public:
 	L_arr(int length);
 	
 	//спільні 
+	class iterator_arr
+	{
+	public:
+		iterator_arr() { i = 0; }
+		
+		
+		
+		void set_iter(T d) { data[i] = d; }
+		T value() { return data[i]; }
+
+	private:
+		int i;
+	};
 	bool add_tail(T d)override;
 	bool add_head(T d)override;
 	int size()override;
 	void clean()override;
 	void del_i(int k)override;
 	int search_el(T d)override;
-	T search_by_index(int k)override;
+	//T search_by_index(int k)override;
 	int search_first_with (function<bool(T)> f)override;
-	
+	//iter
+	T operator[](int k)override;
+	bool rewrite(int k, T d)override;
+	void set_iter() { iter = 0; }
+	void add_iter() { if (iter + 1 < count)iter++; }
+	void add_iter(int k) { if (iter + k < count || iter + k >= 0)iter++; }
+	//додати ще функції сюди і в інші
+
 	//деструктор
 	~L_arr() { delete[] data; }
 	//////////////
 private:
+	
+	
 	T *data = nullptr;// масив
 	int count;//к-ть елементів зара
-	int index;//позиція даного елемента 
+	int iter=0;
 	int Max;//максимаьна кількість
 };
 
@@ -44,7 +66,7 @@ L_arr<T>::L_arr(int length)
 {
 	Max = length;
 	count = 0;
-	index = 0;
+	iter = 0;
 	data = new T[Max];
 }
 
@@ -78,7 +100,7 @@ bool L_arr<T>::add_head(T d)
 template<typename T>
 void L_arr<T>::clean() 
 {
-	index = 0;
+	iter = 0;
 	while (count > 0)
 	{
 		count--;
@@ -110,7 +132,7 @@ int L_arr<T> ::search_el(T d)
 }
 
 template<typename T>
-T L_arr<T>::search_by_index(int k)
+T L_arr<T>::operator[](int k)
 {
 	if (k < count&&k >= 0) return data[k];
 	return (T)nullptr;
@@ -124,4 +146,14 @@ int L_arr<T>::search_first_with (function<bool(T)> f)
 		if (f(data[i])) return i;
 	}
 	return -1;
+}
+
+template<typename T>
+bool L_arr<T>::rewrite(int k, T d)
+{
+	if (k < count&&k >= 0) 
+	{
+		data[k] = d;
+		return true;
+	}
 }

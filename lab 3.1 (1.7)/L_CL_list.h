@@ -16,8 +16,10 @@ public:
 	void clean()override;
 	void del_i(int k)override;
 	int search_el(T d)override;
-	T search_by_index(int k)override;
+	//T search_by_index(int k)override;
 	int search_first_with (function<bool(T)> f) override;
+	T operator[](int i)override;
+	bool rewrite(int i, T d)override;
 
 	//деструктор
 	~L_list() {
@@ -42,7 +44,7 @@ private:
 	};
 
 	int count;//к-ть елементів зара
-	//Node<T> *el_n;//в даний момент часу
+	int iter = 0;
 	Node<T> *head;//голова
 	Node<T> *tail;//хвіст
 	
@@ -155,7 +157,7 @@ int L_list<T>::search_el(T d)
 }
 
 template<typename T>
-T L_list<T>::search_by_index(int k)
+T L_list<T>::operator[](int k)
 {
 	Node<T> *tmp = head;
 	if (k >= count || k < 0) return (T) nullptr;
@@ -177,4 +179,17 @@ int L_list<T>::search_first_with (function<bool(T)> f)
 		tmp = tmp->next;
 	}
 	return -1;
+}
+
+template<typename T>
+bool L_list<T>::rewrite(int k, T d)
+{
+	if (k >= count || k < 0) return false;
+	Node<T> *tmp = head;
+	while (k)
+	{
+		k--;
+		tmp = tmp->next;
+	}
+	tmp->data = d;
 }

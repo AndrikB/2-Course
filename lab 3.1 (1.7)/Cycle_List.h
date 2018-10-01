@@ -32,9 +32,9 @@ public:
 	void clean();
 	void del_i(int i);
 	int search_el(T d);
-	T search_by_index(int i);
+	T operator[](int i);
 	int search_first_with(function<bool(T)> f);
-
+	bool rewrite(int i, T d);
 private:
 	MODE mode = arr;
 	int SIZE = 0;
@@ -104,9 +104,9 @@ int Cycle_List<T>::search_el(T d)
 }
 
 template<typename T>
-T Cycle_List<T>::search_by_index(int i)
+T Cycle_List<T>::operator[](int i)
 {
-	return impl->search_by_index(i%size());
+	return impl->operator[](i%size());
 }
 
 template<typename T>
@@ -115,3 +115,8 @@ int  Cycle_List<T>::search_first_with(function<bool(T)> f)
 	return impl->search_first_with(f);
 }
 
+template<typename T>
+bool Cycle_List<T>::rewrite(int k, T d)
+{
+	return impl->rewrite(k, d);
+}

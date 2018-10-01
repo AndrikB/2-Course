@@ -38,23 +38,7 @@ void cout_weekday(int count)
 	WeekDay.add_tail("Saturday");
 	
 
-	cout << WeekDay.search_by_index(count) << endl;
-
-	//count = count % 7;
-	//switch (count)
-	//{												
-	//case 1: cout << "Monday"; break; 
-	//case 2: cout << "Tuesday"; break;
-	//case 3: cout << "Wednesday"; break;
-	//case 4: cout << "Thursday"; break;
-	//case 5: cout << "Friday"; break; 
-	//case 6: cout << "Saturday"; break;
-	//case 0: cout << "Sunday"; break;
-	//default:
-	//	cout << "The date isnt correct";
-	//	break;
-	//}
-	//cout << endl;
+	cout << WeekDay[count] << endl;
 }
 
 
@@ -76,41 +60,42 @@ bool b(T d)
 int main()
 {
 	Cycle_List<int> L;
-	L.set_mode(3);
 	
-	cout << L.add_tail(5)<<' ';
-	cout << L.add_head(14) << ' ';
-	cout << L.add_tail(24) << ' ';
-	cout << L.add_head(105) << ' ';
-	cout << L.size() << endl << endl;
-	
-	
-	cout << L.search_by_index(L.search_first_with (b<int>)) << endl << endl;
-	cout << L.search_by_index(0) << ' '
-		<< L.search_by_index(1) << ' '
-		<< L.search_by_index(2) << ' '
-		<< L.search_by_index(3) << ' '
-		<< L.search_by_index(4) << ' '
-		<< L.search_by_index(5) << endl << endl << endl;
-	L.clean();
-	
-	cout << L.add_tail(5) << ' ';
-	cout << L.add_head(14) << ' ';
-	cout << L.add_tail(24) << ' ';
-	cout << L.add_head(105) << ' ';
-	cout << L.size() << endl << endl;
-	
-	
-	cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
-	
-	L.del_i(L.search_first_with(b<int>));
-	cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
-	cout << L.search_by_index(0) << ' '
-		<< L.search_by_index(1) << ' '
-		<< L.search_by_index(2) << ' '
-		<< L.search_by_index(3) << ' '
-		<< L.search_by_index(4) << ' '
-		<< L.search_by_index(5) << endl;
+	//L.set_mode(3);
+	//
+	//cout << L.add_tail(5)<<' ';
+	//cout << L.add_head(14) << ' ';
+	//cout << L.add_tail(24) << ' ';
+	//cout << L.add_head(105) << ' ';
+	//cout << L.size() << endl << endl;
+	//
+	//
+	//cout << L.search_by_index(L.search_first_with (b<int>)) << endl << endl;
+	//cout << L.search_by_index(0) << ' '
+	//	<< L.search_by_index(1) << ' '
+	//	<< L.search_by_index(2) << ' '
+	//	<< L.search_by_index(3) << ' '
+	//	<< L.search_by_index(4) << ' '
+	//	<< L.search_by_index(5) << endl << endl << endl;
+	//L.clean();
+	//
+	//cout << L.add_tail(5) << ' ';
+	//cout << L.add_head(14) << ' ';
+	//cout << L.add_tail(24) << ' ';
+	//cout << L.add_head(105) << ' ';
+	//cout << L.size() << endl << endl;
+	//
+	//
+	//cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
+	//
+	//L.del_i(L.search_first_with(b<int>));
+	//cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
+	//cout << L.search_by_index(0) << ' '
+	//	<< L.search_by_index(1) << ' '
+	//	<< L.search_by_index(2) << ' '
+	//	<< L.search_by_index(3) << ' '
+	//	<< L.search_by_index(4) << ' '
+	//	<< L.search_by_index(5) << endl;
 
 	//Date d(-2018, 12, 31	, 1, 1, 1);
 	//cout << d.is_correct()<<' ';

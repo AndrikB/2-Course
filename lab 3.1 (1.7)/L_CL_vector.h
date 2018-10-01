@@ -20,21 +20,18 @@ public:
 	void clean()override;
 	void del_i(int k)override;
 	int search_el(T d)override;
-	T search_by_index(int k)override;
+	//T search_by_index(int k)override;
 	int search_first_with (function<bool(T)> f)override;
 
-	//iter
-	//void set_iter();
-	//bool add_iter();
-	//bool add_iter(int i);
-	//деструктор
+	T operator[](int i)override;
+	bool rewrite(int i, T d)override;
+
 
 	/////////////////
 private:
 
 	vector<T> data;
-
-	
+	int iter = 0;
 
 };
 
@@ -62,7 +59,7 @@ template<typename T>
 void L_vector<T>::clean()
 {
 	data.clear();
-	it = nullptr;
+	//it = nullptr;
 }
 
 template<typename T>
@@ -84,7 +81,7 @@ int  L_vector<T>::search_el(T d)
 }
 
 template<typename T>
-T L_vector<T>::search_by_index(int k)
+T L_vector<T>::operator[](int k)
 {
 	if (k < data.size()&&k >= 0) return data[k];
 	return (T) nullptr;
@@ -100,25 +97,11 @@ int L_vector<T>::search_first_with (function<bool(T)> f)
 	return -1;
 }
 
-//template<typename T>
-//void L_vector<T>::set_iter()
-//{
-//	it = data.begin();
-//}
-//
-//template<typename T>
-//bool L_vector<T>::add_iter()
-//{
-//	if (it+1 >= data.end)return false;
-//	it++;
-//	return true;
-//}
-//
-//template<typename T>
-//bool L_vector<T>::add_iter(int i)
-//{
-//	if (it + i > data.end) return false;
-//	if (it + i < data.begin) return false;
-//	it = it + i;
-//	return true;
-//}
+template<typename T>
+bool L_vector<T>::rewrite(int k, T d)
+{
+	if (k >= data.size() || k < 0) return false;
+	data.erase(data.begin() + k);
+	data.insert(data.begin() + k);
+	
+}
