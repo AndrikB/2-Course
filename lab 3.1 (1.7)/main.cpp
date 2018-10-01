@@ -59,7 +59,7 @@ bool b(T d)
 
 int main()
 {
-	Cycle_List<int> L;
+	//Cycle_List<int> L;
 	
 	//L.set_mode(3);
 	//
@@ -97,13 +97,16 @@ int main()
 	//	<< L.search_by_index(4) << ' '
 	//	<< L.search_by_index(5) << endl;
 
-	//Date d(-2018, 12, 31	, 1, 1, 1);
-	//cout << d.is_correct()<<' ';
+	Date d(2018, -12, 31	, 0, 0, 0);
+	Date D;
+	interval K;
+	K = d - D;
+	K.write();
 	//cout << d.weekday();
 	cout << endl;
-	//d.make_correct();
-	
-	//cout_weekday(d.weekday());
+
+	d.write();
+	cout_weekday(d.weekday());
 
 
 

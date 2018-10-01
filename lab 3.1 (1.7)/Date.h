@@ -1,5 +1,6 @@
 #pragma once
 
+class interval;
 
 class Date
 {
@@ -21,16 +22,51 @@ public:
 		hour = h;
 		minute = mi;
 		second = s;
+		make_correct();
 	};
 
-	bool is_correct();
+
 	bool is_intercalary();
-	void make_correct();
 	
 	void cout_weekday();
+	int weekday();
+	Date operator+(interval D2);
+	Date operator-(interval D2);
+	interval operator-(Date D2);
+	void write();
+	bool is_AC() { make_correct(); return (year > 0); }
+private:
+	int year, month, day, hour, minute, second;
+	void make_correct();
+	bool is_correct();
+};
+
+class interval 
+{
+	friend Date;
+public:
+	interval()
+	{
+		year = 0;
+		month = 0;
+		day = 0;
+		hour = 0;
+		minute = 0;
+		second = 0;
+	};
+	interval(int y, int mo, int d, int h, int mi, int s)
+	{
+		year = y;
+		month = mo;
+		day = d;
+		hour = h;
+		minute = mi;
+		second = s;
+	};
+	void write();
 
 private:
 	int year, month, day, hour, minute, second;
-	int weekday();
-
+	void make_correct();
 };
+

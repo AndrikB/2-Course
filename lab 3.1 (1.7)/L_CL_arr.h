@@ -156,4 +156,5 @@ bool L_arr<T>::rewrite(int k, T d)
 		data[k] = d;
 		return true;
 	}
+	return false;
 }

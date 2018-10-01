@@ -38,47 +38,38 @@ bool Date::is_correct()
 void Date::make_correct()
 {
 
-
-	while (!this->is_correct())
+	while (month < 1)
 	{
-		if (month > 12) 
-		{
-			year = year + month / 12;
-			month = month % 12;
-			if (month == 0)
-			{
-				month = 12;
-				year--;
-			}
-		}
-		//day
-		
-		if (month == 2)//feb
-			if (day > 28 + this->is_intercalary())
-			{
-				day = day - 28 - this->is_intercalary();
-				month++;
-				continue;//becouse month may be 14 and it is big problem
-			}
-			else;
-		else if (month == 4 || month == 6 || month == 9 || month == 11)//apr, june, sep, nov
-			if (day > 30)
-			{
-				day = day -30;
-				month++;
-				continue;
-			}
-			else;
-		else if (day>31)
-		{
-			day = day - 31;
-			month++;
-			continue;
-		}
+		month += 12;
+		year--;
+	}
+	while (month > 12)
+	{
+		month -= 12;
+		year++;
+	}
 
+	while (day < 1)
+	{
+		month--;
+		if (month < 1)
+		{
+			month += 12;
+			year--;
+		}
+		day += day_in_month(year, month);
+	}
+	while (day > day_in_month(year, month))
+	{
+		day -= day_in_month(year, month);
+		month++;
+		if (month > 12)
+		{
+			month -= 12;
+			year++;
+		}
+	}
 
-	} 
-	
 }
 
 int Date::weekday() 
@@ -118,7 +109,7 @@ void Date::cout_weekday()
 	int count = weekday();
 	if (count < 0)
 	{
-		std::cout << "The date isnt correct" << std::endl;
+		std::cout << "The date isnt correct for now" << std::endl;
 		return;
 	}
 
@@ -138,3 +129,65 @@ void Date::cout_weekday()
 	}
 	std::cout << std::endl;
 }
+
+Date Date::operator+(interval D2)
+{
+	Date D3(year+D2.year, month + D2.month, day + D2.day, hour + D2.hour, minute + D2.minute, second + D2.second );
+	D3.make_correct();
+	return D3;
+}
+
+Date Date::operator-(interval D2)
+{
+	Date D3(year - D2.year, month - D2.month, day - D2.day, hour - D2.hour, minute - D2.minute, second - D2.second);
+	D3.make_correct();
+	return D3;
+}
+
+interval Date::operator-(Date D2) 
+{
+	interval T(year - D2.year, month - D2.month, day - D2.day, hour - D2.hour, minute - D2.minute, second - D2.second);
+	T.make_correct();
+	return T;
+}
+
+void  Date::write() { std::cout << year << ' ' << month << ' ' << day << ' ' << hour << ' ' << minute << ' ' << second << std::endl; }
+
+void interval::make_correct()
+{
+
+	while (month < 1)
+	{
+		month += 12;
+		year--;
+	}
+	while (month > 12)
+	{
+		month -= 12;
+		year++;
+	}
+
+	while (day < 1)
+	{
+		month--;
+		if (month < 1)
+		{
+			month += 12;
+			year--;
+		}
+		day += day_in_month(year, month);
+	}
+	while (day > day_in_month(year, month))
+	{
+		day -= day_in_month(year, month);
+		month++;
+		if (month > 12)
+		{
+			month -= 12;
+			year++;
+		}
+	}
+
+}
+
+void interval::write() { std::cout << year << ' ' << month << ' ' << day << ' ' << hour << ' ' << minute << ' ' << second << std::endl; }
