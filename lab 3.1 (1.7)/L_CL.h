@@ -1,7 +1,7 @@
 #pragma once
 #include<thread>
 #include<utility>
-//#include"L_CL_list.h"
+
 using std::function;
 
 template<typename T1>
@@ -19,20 +19,9 @@ struct ptr
 	T* data;
 };
 
-enum MODE
-{
-	arr,
-	list,
-	Vector
-};
 
-//template<typename T>
-//class iter
-//{
-//public:
-//	virtual void set_head() = 0;
-//	
-//};
+
+
 
 template<typename T>
 class L_CL

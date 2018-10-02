@@ -3,16 +3,6 @@
 #include<thread>
 using std::function;
 
-//template<typename T>
-//class iter_arr :public iter<T>
-//{
-//public:
-//	iter_arr() { i = 0; }
-//	void set_head()override;
-//	//iter_arr(int k) { i = k; }
-//private:
-//	int i;
-//};
 
 
 
@@ -43,7 +33,6 @@ private:
 	
 	T *data = nullptr;// масив
 	int count;//к-ть елементів зара
-	int iter=0;
 	int Max;//максимаьна кількість
 };
 
@@ -69,7 +58,6 @@ L_arr<T>::L_arr(int length)
 {
 	Max = length;
 	count = 0;
-	iter = 0;
 	data = new T[Max];
 }
 
@@ -103,7 +91,6 @@ bool L_arr<T>::add_head(T d)
 template<typename T>
 void L_arr<T>::clean() 
 {
-	iter = 0;
 	while (count > 0)
 	{
 		count--;

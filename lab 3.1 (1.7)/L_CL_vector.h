@@ -6,21 +6,6 @@ using std::function;
 using std::vector;
 using std::iterator;
 
-//template<typename T>
-//class iter_vector:public iter<T>
-//{
-//public:
-//	iter_vector() { i = 0; }
-//	void set_head()override;
-//
-//private:
-//	int i;
-//};
-
-//template<typename T>
-//void iter_vector<T>::set_head()
-//{}
-
 template<typename T>
 class L_vector :public L_CL<T>
 {
@@ -35,17 +20,13 @@ public:
 	void clean()override;
 	void del_i(int k)override;
 	int search_el(T d)override;
-	//T search_by_index(int k)override;
 	int search_first_with (function<bool(T)> f)override;
 
 	T operator[](int i)override;
 	bool rewrite(int i, T d)override;
 
 	ptr<T> begin();
-	//friend iter_vector set_iter(L_vector L, int i) { iter_vector k(i); return k; }
-	
-	//деструктор
-	/////////////////
+
 private:
 
 	vector<T> data;
@@ -85,7 +66,6 @@ template<typename T>
 void L_vector<T>::clean()
 {
 	data.clear();
-	//it = nullptr;
 }
 
 template<typename T>

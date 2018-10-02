@@ -34,13 +34,10 @@ public:
 	T operator[](int i);
 	int search_first_with (function<bool(T)> f);
 	bool rewrite(int i, T d);
-	MODE get_mode()
-	{
-		return mode;
-	}
+
 	ptr<T> begin();
 private:
-	MODE mode = arr;
+	
 	int SIZE = 0;
 	L_CL<T>*impl;
 
@@ -58,18 +55,18 @@ void List<T>::set_mode(int mode)
 			impl = new L_arr<T>(SIZE);
 		else
 			impl = new L_arr<T>;
-		this->mode = MODE::arr;
+		
 		
 	}
 	else if (mode == 2)
 	{
 		impl = new L_list<T>;
-		this->mode = MODE::list;
+		
 	}
 	else 
 	{
 		impl = new L_vector<T>;
-		this->mode = MODE::Vector;
+		
 	}
 }
 

@@ -6,7 +6,7 @@ template<typename T>
 class iter
 {
 public:
-	//virtual void set_head() = 0;
+
 	iter(ptr<T> tmp)
 	{
 		this->pointer = tmp;

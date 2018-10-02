@@ -42,7 +42,7 @@ void cout_weekday(int count)
 	cout << WeekDay[count] << endl;
 }
 
-
+//it is only for function<bool<T>>
 template <typename T>
 bool b(T d)
 {
@@ -50,17 +50,10 @@ bool b(T d)
 	return false;
 }
 
-//template <>
-//bool b</*назва класу*/>(/*назва класу*/ d)
-//{
-//	if (d < 50)return true;
-//	return false;
-//}
-
 
 void test1() 
 {
-	List<int> L;
+	/*Cycle_*/List<int> L;
 	L.set_mode(2);
 	L.add_tail(5);
 	L.add_head(14);
@@ -73,6 +66,7 @@ void test1()
 	my_iter++;
 	cout << *my_iter;
 }
+
 
 
 int main()

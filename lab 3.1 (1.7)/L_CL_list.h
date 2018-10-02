@@ -12,7 +12,7 @@ class L_list :public L_CL<T>
 {
 public:
 	//конструктори
-	L_list() { count = 0; /*el_n = */head = tail = nullptr; }
+	L_list() { count = 0; head = tail = nullptr; }
 
 	//спільні
 	bool add_tail(T d)override;
@@ -21,7 +21,6 @@ public:
 	void clean()override;
 	void del_i(int k)override;
 	int search_el(T d)override;
-	//T search_by_index(int k)override;
 	int search_first_with (function<bool(T)> f) override;
 	T operator[](int i)override;
 	bool rewrite(int i, T d)override;
@@ -46,10 +45,9 @@ private:
 	
 
 	int count;//к-ть елементів зара
-	int iter = 0;
+
 	Node<T> *head;//голова
 	Node<T> *tail;//хвіст
-	vector<Node<T>*> iterators;
 };
 
 template<typename T>
@@ -95,7 +93,6 @@ bool L_list<T>::add_head(T d)
 		tail = head;
 		tail->data = d;
 		tail->next = tail;
-		//el_n = head;
 		return true;
 	}
 	else
