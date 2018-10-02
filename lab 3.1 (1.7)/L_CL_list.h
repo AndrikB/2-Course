@@ -67,7 +67,6 @@ bool L_list<T>::add_tail(T d)
 		tail = head;
 		tail->data = d;
 		tail->next = tail;
-		//el_n = head;
 		return true;
 	}
 	else
@@ -166,7 +165,7 @@ template<typename T>
 T L_list<T>::operator[](int k)
 {
 	Node<T> *tmp = head;
-	if (k >= count || k < 0) return (T) nullptr;
+	if (k >= count || k < 0)exit(1);
 	for (int i = 0; i < k; i++)
 	{
 		tmp = tmp->next;

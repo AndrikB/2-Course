@@ -88,7 +88,6 @@ T L_vector<T>::operator[](int k)
 {
 	if (k < data.size()&&k >= 0) return data[k];
 	exit(1);
-	return (T) nullptr;
 }
 
 template<typename T>

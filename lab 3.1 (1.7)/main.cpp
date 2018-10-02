@@ -28,8 +28,8 @@ void cout_weekday(int count)
 		cout << "The date isnt correct" << endl;
 		return;
 	}
-	List<string> WeekDay;
-
+	Cycle_List<string> WeekDay;
+	WeekDay.set_mode(2);
 	WeekDay.add_tail("Sunday");
 	WeekDay.add_tail("Monday");
 	WeekDay.add_tail("Tuesday");
@@ -55,75 +55,61 @@ void test1()
 {
 	/*Cycle_*/List<int> L;
 	L.set_mode(2);
+
 	L.add_tail(5);
 	L.add_head(14);
 	L.add_tail(24);
 	L.add_head(105);
+	L.add_tail(33);
+	L.add_head(77);
 	iter<int> my_iter = L.begin();
-	cout << *my_iter;
+	cout << *my_iter<<' ';
+	my_iter+=2;
+	cout << *my_iter << ' ';
 	my_iter++;
-	cout << *my_iter;
+	cout << *my_iter << ' ';
 	my_iter++;
-	cout << *my_iter;
-	my_iter++;
-	cout << *my_iter;
+	cout << *my_iter << ' ';
+	cout << endl;
 }
 
+void test2()
+{
+	Date d(2018, -12, 31, 0, 0, 0);
+	Date D;
+	interval K;
+	K = d - D;
+	K.write();
 
+	cout << endl;
+	d.write();
+	cout_weekday(d.weekday());///==d.cout_weekday();
+	cout << endl;
+}
+
+void test3()
+{
+	List<Date> L;
+	Date d(2018, -12, 31, 0, 0, 0);
+	Date D;
+	interval K;
+	K = d - D;
+	Date D2;
+	D2 = d + K;
+	Date D3;
+	D3 = D2 + K;
+	L.add_head(D2);
+	L.add_head(D);
+	L.add_head(D3);
+	L[2].write();
+	
+}
 
 int main()
 {
-	test1();
+	test3();
 	Cycle_List<int> L;
 	
-	//L.set_mode(3);
-	//
-	//cout << L.add_tail(5)<<' ';
-	//cout << L.add_head(14) << ' ';
-	//cout << L.add_tail(24) << ' ';
-	//cout << L.add_head(105) << ' ';
-	//cout << L.size() << endl << endl;
-	//
-	//
-	//cout << L.search_by_index(L.search_first_with (b<int>)) << endl << endl;
-	//cout << L.search_by_index(0) << ' '
-	//	<< L.search_by_index(1) << ' '
-	//	<< L.search_by_index(2) << ' '
-	//	<< L.search_by_index(3) << ' '
-	//	<< L.search_by_index(4) << ' '
-	//	<< L.search_by_index(5) << endl << endl << endl;
-	//L.clean();
-	//
-	//cout << L.add_tail(5) << ' ';
-	//cout << L.add_head(14) << ' ';
-	//cout << L.add_tail(24) << ' ';
-	//cout << L.add_head(105) << ' ';
-	//cout << L.size() << endl << endl;
-	//
-	//
-	//cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
-	//
-	//L.del_i(L.search_first_with(b<int>));
-	//cout << L.search_by_index(L.search_first_with(b<int>)) << endl << endl;
-	//cout << L.search_by_index(0) << ' '
-	//	<< L.search_by_index(1) << ' '
-	//	<< L.search_by_index(2) << ' '
-	//	<< L.search_by_index(3) << ' '
-	//	<< L.search_by_index(4) << ' '
-	//	<< L.search_by_index(5) << endl;
-
-	//Date d(2018, -12, 31	, 0, 0, 0);
-	//Date D;
-	//interval K;
-	//K = d - D;
-	//K.write();
-	////cout << d.weekday();
-	//cout << endl;
-
-	//d.write();
-	//cout_weekday(d.weekday());
-
-
 
 	system("pause");
 	return 0;

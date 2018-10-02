@@ -27,11 +27,12 @@ public:
 
 
 	bool is_intercalary();
-	
 	void cout_weekday();
 	int weekday();
 	Date operator+(interval D2);
 	Date operator-(interval D2);
+	bool operator==(Date D2);
+	bool operator!=(Date D2) { return !(this->operator==(D2)); }
 	interval operator-(Date D2);
 	void write();
 	bool is_AC() { make_correct(); return (year > 0); }

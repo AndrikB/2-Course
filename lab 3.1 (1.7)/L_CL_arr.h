@@ -92,7 +92,7 @@ void L_arr<T>::clean()
 	while (count > 0)
 	{
 		count--;
-		data[count] = (T)nullptr;
+		
 	}
 }
 
@@ -123,7 +123,7 @@ template<typename T>
 T L_arr<T>::operator[](int k)
 {
 	if (k < count&&k >= 0) return data[k];
-	return (T)nullptr;
+	exit(1);
 }
 
 template<typename T>

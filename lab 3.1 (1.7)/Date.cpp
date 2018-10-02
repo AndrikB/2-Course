@@ -151,6 +151,17 @@ interval Date::operator-(Date D2)
 	return T;
 }
 
+bool Date::operator==(Date D2)
+{
+	if (this->year != D2.year) return false;
+	if (this->month != D2.month) return false;
+	if (this->day != D2.day) return false;
+	if (this->hour != D2.hour) return false;
+	if (this->minute != D2.minute) return false;
+	if (this->second != D2.second) return false;
+	return true;
+}
+
 void  Date::write() { std::cout << year << ' ' << month << ' ' << day << ' ' << hour << ' ' << minute << ' ' << second << std::endl; }
 
 void interval::make_correct()
