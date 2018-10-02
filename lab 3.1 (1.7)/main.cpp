@@ -65,6 +65,8 @@ void test1()
 	cout << *my_iter;
 	my_iter++;
 	cout << *my_iter;
+	my_iter++;
+	cout << *my_iter;
 }
 
 

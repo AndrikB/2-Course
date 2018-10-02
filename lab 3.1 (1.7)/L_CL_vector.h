@@ -10,10 +10,7 @@ template<typename T>
 class L_vector :public L_CL<T>
 {
 public:
-	//конструктори
-	
 
-	//спільні
 	bool add_tail(T d)override;
 	bool add_head(T d)override;
 	int size()override;

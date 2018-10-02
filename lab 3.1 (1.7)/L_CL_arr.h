@@ -4,13 +4,11 @@
 using std::function;
 
 
-
-
 template<typename T>
 class L_arr :public L_CL<T>
 {
 public:
-	//конструктори
+
 	L_arr();
 	L_arr(int length);
 	
@@ -25,15 +23,15 @@ public:
 	bool rewrite(int k, T d)override;
 	ptr<T> begin();
 	
-	//деструктор
+
 	~L_arr() { delete[] data; }
-	//////////////
+
 private:
 	
 	
-	T *data = nullptr;// масив
-	int count;//к-ть елементів зара
-	int Max;//максимаьна кількість
+	T *data = nullptr;
+	int count;
+	int Max;
 };
 
 template<typename T>

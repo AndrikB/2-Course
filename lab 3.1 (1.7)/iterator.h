@@ -6,7 +6,7 @@ template<typename T>
 class iter
 {
 public:
-
+	
 	iter(ptr<T> tmp)
 	{
 		this->pointer = tmp;

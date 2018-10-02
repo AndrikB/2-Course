@@ -11,10 +11,10 @@ template<typename T>
 class L_list :public L_CL<T>
 {
 public:
-	//конструктори
+
 	L_list() { count = 0; head = tail = nullptr; }
 
-	//спільні
+
 	bool add_tail(T d)override;
 	bool add_head(T d)override;
 	int size()override;
@@ -28,8 +28,6 @@ public:
 
 
 
-	
-	//деструктор
 	~L_list() {
 		tail->next = nullptr;
 		while (head->next)
