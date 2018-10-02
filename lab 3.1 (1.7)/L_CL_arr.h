@@ -2,6 +2,20 @@
 #include "L_CL.h"
 #include<thread>
 using std::function;
+
+//template<typename T>
+//class iter_arr :public iter<T>
+//{
+//public:
+//	iter_arr() { i = 0; }
+//	void set_head()override;
+//	//iter_arr(int k) { i = k; }
+//private:
+//	int i;
+//};
+
+
+
 template<typename T>
 class L_arr :public L_CL<T>
 {
@@ -10,36 +24,17 @@ public:
 	L_arr();
 	L_arr(int length);
 	
-	//спільні 
-	class iterator_arr
-	{
-	public:
-		iterator_arr() { i = 0; }
-		
-		
-		
-		void set_iter(T d) { data[i] = d; }
-		T value() { return data[i]; }
-
-	private:
-		int i;
-	};
 	bool add_tail(T d)override;
 	bool add_head(T d)override;
 	int size()override;
 	void clean()override;
 	void del_i(int k)override;
 	int search_el(T d)override;
-	//T search_by_index(int k)override;
 	int search_first_with (function<bool(T)> f)override;
-	//iter
 	T operator[](int k)override;
 	bool rewrite(int k, T d)override;
-	void set_iter() { iter = 0; }
-	void add_iter() { if (iter + 1 < count)iter++; }
-	void add_iter(int k) { if (iter + k < count || iter + k >= 0)iter++; }
-	//додати ще функції сюди і в інші
-
+	ptr<T> begin();
+	
 	//деструктор
 	~L_arr() { delete[] data; }
 	//////////////
@@ -51,6 +46,14 @@ private:
 	int iter=0;
 	int Max;//максимаьна кількість
 };
+
+template<typename T>
+ptr<T> L_arr<T>::begin()
+{
+	ptr<T> tmp;
+	tmp.data = &data[0];
+	return tmp;
+}
 
 template<typename T>
 L_arr<T>::L_arr()

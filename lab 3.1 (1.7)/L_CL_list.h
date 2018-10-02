@@ -1,7 +1,12 @@
 #pragma once
 #include "L_CL.h"
 #include<thread>
+#include<vector>
+using std::vector;
 using std::function;
+
+
+
 template<typename T>
 class L_list :public L_CL<T>
 {
@@ -20,7 +25,11 @@ public:
 	int search_first_with (function<bool(T)> f) override;
 	T operator[](int i)override;
 	bool rewrite(int i, T d)override;
+	ptr<T> begin()override;
 
+
+
+	
 	//деструктор
 	~L_list() {
 		tail->next = nullptr;
@@ -34,21 +43,23 @@ public:
 		delete head;
 	}
 private:
-	template<typename T>
-	class Node
-	{
-	public:
-		Node * next;
-		T data;
-				
-	};
+	
 
 	int count;//к-ть елементів зара
 	int iter = 0;
 	Node<T> *head;//голова
 	Node<T> *tail;//хвіст
-	
+	vector<Node<T>*> iterators;
 };
+
+template<typename T>
+ptr<T> L_list<T>::begin()
+{
+	ptr<T> tmp;
+	tmp.data = &head->data;
+	tmp.head = head;
+	return tmp;
+}
 
 template<typename T>
 bool L_list<T>::add_tail(T d)
@@ -192,4 +203,5 @@ bool L_list<T>::rewrite(int k, T d)
 		tmp = tmp->next;
 	}
 	tmp->data = d;
+	return true;
 }

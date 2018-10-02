@@ -35,11 +35,20 @@ public:
 	T operator[](int i);
 	int search_first_with(function<bool(T)> f);
 	bool rewrite(int i, T d);
+	ptr<T> begin();
+	//iter<T> createIterator();
+
 private:
 	MODE mode = arr;
 	int SIZE = 0;
 	L_CL<T>*impl;
 };
+
+template<typename T>
+ptr<T> Cycle_List<T>::begin()
+{
+	return impl->begin();
+}
 
 template<typename T>
 void Cycle_List<T>::set_mode(int mode)

@@ -34,6 +34,11 @@ public:
 	T operator[](int i);
 	int search_first_with (function<bool(T)> f);
 	bool rewrite(int i, T d);
+	MODE get_mode()
+	{
+		return mode;
+	}
+	ptr<T> begin();
 private:
 	MODE mode = arr;
 	int SIZE = 0;
@@ -107,7 +112,7 @@ int List<T>::search_el(T d)
 template<typename T>
 T List<T>::operator[](int i)
 {
-	return impl[i];
+	return impl->operator[](i);
 }
 
 template<typename T>
@@ -120,4 +125,10 @@ template<typename T>
 bool List<T>::rewrite(int k, T d)
 {
 	return impl->rewrite(k, d);
+}
+
+template<typename T>
+ ptr<T> List<T>::begin()
+{
+	return impl->begin();
 }

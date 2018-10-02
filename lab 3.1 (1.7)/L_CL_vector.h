@@ -6,6 +6,21 @@ using std::function;
 using std::vector;
 using std::iterator;
 
+//template<typename T>
+//class iter_vector:public iter<T>
+//{
+//public:
+//	iter_vector() { i = 0; }
+//	void set_head()override;
+//
+//private:
+//	int i;
+//};
+
+//template<typename T>
+//void iter_vector<T>::set_head()
+//{}
+
 template<typename T>
 class L_vector :public L_CL<T>
 {
@@ -26,7 +41,10 @@ public:
 	T operator[](int i)override;
 	bool rewrite(int i, T d)override;
 
-
+	ptr<T> begin();
+	//friend iter_vector set_iter(L_vector L, int i) { iter_vector k(i); return k; }
+	
+	//деструктор
 	/////////////////
 private:
 
@@ -34,6 +52,14 @@ private:
 	int iter = 0;
 
 };
+
+template<typename T>
+ptr<T> L_vector<T>::begin()
+{
+	ptr<T> tmp;
+	tmp.data = &data[0];
+	return tmp;
+}
 
 template<typename T>
 bool L_vector<T>::add_tail(T d) 
@@ -84,6 +110,7 @@ template<typename T>
 T L_vector<T>::operator[](int k)
 {
 	if (k < data.size()&&k >= 0) return data[k];
+	exit(1);
 	return (T) nullptr;
 }
 
@@ -102,6 +129,6 @@ bool L_vector<T>::rewrite(int k, T d)
 {
 	if (k >= data.size() || k < 0) return false;
 	data.erase(data.begin() + k);
-	data.insert(data.begin() + k);
-	
+	data.insert(data.begin() + k, d);
+	return true;
 }

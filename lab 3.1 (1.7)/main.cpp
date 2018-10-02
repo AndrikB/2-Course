@@ -3,7 +3,7 @@
 #include "L_CL_list.h"
 #include "L_CL_vector.h"
 #include <string>
-
+#include<utility>
 #include "L_CL.h"
 
 #include "List.h"
@@ -12,6 +12,7 @@
 #include "Date.h"
 
 #include<thread>
+#include"iterator.h"
 
 using std::cout;
 using std::endl;
@@ -27,7 +28,7 @@ void cout_weekday(int count)
 		cout << "The date isnt correct" << endl;
 		return;
 	}
-	Cycle_List<string> WeekDay;
+	List<string> WeekDay;
 
 	WeekDay.add_tail("Sunday");
 	WeekDay.add_tail("Monday");
@@ -57,9 +58,27 @@ bool b(T d)
 //}
 
 
+void test1() 
+{
+	List<int> L;
+	L.set_mode(2);
+	L.add_tail(5);
+	L.add_head(14);
+	L.add_tail(24);
+	L.add_head(105);
+	iter<int> my_iter = L.begin();
+	cout << *my_iter;
+	my_iter++;
+	cout << *my_iter;
+	my_iter++;
+	cout << *my_iter;
+}
+
+
 int main()
 {
-	//Cycle_List<int> L;
+	test1();
+	Cycle_List<int> L;
 	
 	//L.set_mode(3);
 	//
@@ -97,16 +116,16 @@ int main()
 	//	<< L.search_by_index(4) << ' '
 	//	<< L.search_by_index(5) << endl;
 
-	Date d(2018, -12, 31	, 0, 0, 0);
-	Date D;
-	interval K;
-	K = d - D;
-	K.write();
-	//cout << d.weekday();
-	cout << endl;
+	//Date d(2018, -12, 31	, 0, 0, 0);
+	//Date D;
+	//interval K;
+	//K = d - D;
+	//K.write();
+	////cout << d.weekday();
+	//cout << endl;
 
-	d.write();
-	cout_weekday(d.weekday());
+	//d.write();
+	//cout_weekday(d.weekday());
 
 
 
