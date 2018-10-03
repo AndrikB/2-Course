@@ -22,7 +22,7 @@ public:
 	void del_i(int k)override;
 	int search_el(T d)override;
 	int search_first_with (function<bool(T)> f) override;
-	T operator[](int i)override;
+	T& operator[](int i)override;
 	bool rewrite(int i, T d)override;
 	ptr<T> begin()override;
 
@@ -162,7 +162,7 @@ int L_list<T>::search_el(T d)
 }
 
 template<typename T>
-T L_list<T>::operator[](int k)
+T& L_list<T>::operator[](int k)
 {
 	Node<T> *tmp = head;
 	if (k >= count || k < 0)exit(1);

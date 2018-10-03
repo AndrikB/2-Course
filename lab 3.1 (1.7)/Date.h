@@ -1,5 +1,7 @@
 #pragma once
-
+#include <iostream>
+using std::ostream;
+using std::istream;
 class interval;
 
 class Date
@@ -34,6 +36,8 @@ public:
 	bool operator==(Date D2);
 	bool operator!=(Date D2) { return !(this->operator==(D2)); }
 	interval operator-(Date D2);
+	friend ostream &operator<<(ostream &os, const Date &d);
+	friend istream &operator>>(istream &is, Date &d);
 	void write();
 	bool is_AC() { make_correct(); return (year > 0); }
 private:

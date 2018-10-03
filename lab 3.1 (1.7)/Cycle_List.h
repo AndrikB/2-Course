@@ -32,7 +32,7 @@ public:
 	void clean();
 	void del_i(int i);
 	int search_el(T d);
-	T operator[](int i);
+	T& operator[](int i);
 	int search_first_with(function<bool(T)> f);
 	bool rewrite(int i, T d);
 	ptr<T> begin();
@@ -106,7 +106,7 @@ int Cycle_List<T>::search_el(T d)
 }
 
 template<typename T>
-T Cycle_List<T>::operator[](int i)
+T& Cycle_List<T>::operator[](int i)
 {
 	return impl->operator[](i%size());
 }

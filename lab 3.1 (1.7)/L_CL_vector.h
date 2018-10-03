@@ -19,7 +19,7 @@ public:
 	int search_el(T d)override;
 	int search_first_with (function<bool(T)> f)override;
 
-	T operator[](int i)override;
+	T& operator[](int i)override;
 	bool rewrite(int i, T d)override;
 
 	ptr<T> begin();
@@ -84,7 +84,7 @@ int  L_vector<T>::search_el(T d)
 }
 
 template<typename T>
-T L_vector<T>::operator[](int k)
+T& L_vector<T>::operator[](int k)
 {
 	if (k < data.size()&&k >= 0) return data[k];
 	exit(1);

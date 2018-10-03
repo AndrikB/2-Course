@@ -15,9 +15,11 @@
 #include"iterator.h"
 
 using std::cout;
+using std::cin;
 using std::endl;
 using std::function;
 using std::string;
+
 
 
 
@@ -101,8 +103,9 @@ void test3()
 	L.add_head(D2);
 	L.add_head(D);
 	L.add_head(D3);
-	L[2].write();
-	
+	cout << L[2] << endl;
+	cin >> L[1];
+	cout << L[1] << endl;
 }
 
 int main()

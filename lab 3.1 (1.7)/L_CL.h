@@ -34,7 +34,7 @@ public:
 	virtual	void del_i(int k) = 0;
 	virtual	int search_el(T d) = 0;
 	virtual int search_first_with (function<bool(T)> f) = 0;
-	virtual T operator[](int k) = 0;
+	virtual T& operator[](int k) = 0;
 	virtual bool rewrite(int k, T d) = 0;
 	virtual ptr<T> begin() = 0;
 };

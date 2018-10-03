@@ -1,5 +1,8 @@
 #include "Date.h"
 #include <iostream>
+using std::ostream;
+using std::istream;
+
 bool intercalary(int y)
 {
 	if (y < 0)y = 1 - y;//it is for BC year
@@ -160,6 +163,18 @@ bool Date::operator==(Date D2)
 	if (this->minute != D2.minute) return false;
 	if (this->second != D2.second) return false;
 	return true;
+}
+
+ostream &operator<<(ostream &os, const Date &d)
+{
+	os << d.year<<' '<<d.month<<' '<<d.day<<' '<<d.hour<<' '<<d.minute<<' '<<d.second;
+	return os;
+}
+
+istream &operator>>(istream &is, Date &d)
+{
+	is >> d.year >> d.month >>  d.day >> d.hour >> d.minute >> d.second;
+	return is;
 }
 
 void  Date::write() { std::cout << year << ' ' << month << ' ' << day << ' ' << hour << ' ' << minute << ' ' << second << std::endl; }

@@ -19,7 +19,7 @@ public:
 	void del_i(int k)override;
 	int search_el(T d)override;
 	int search_first_with (function<bool(T)> f)override;
-	T operator[](int k)override;
+	T& operator[](int k)override;
 	bool rewrite(int k, T d)override;
 	ptr<T> begin();
 	
@@ -120,7 +120,7 @@ int L_arr<T> ::search_el(T d)
 }
 
 template<typename T>
-T L_arr<T>::operator[](int k)
+T& L_arr<T>::operator[](int k)
 {
 	if (k < count&&k >= 0) return data[k];
 	exit(1);
