@@ -51,25 +51,14 @@ template<typename T>
 void List<T>::set_mode(int mode)
 {
 	delete impl;
-
-	if (mode == 1)
+	switch (mode)
 	{
-		if (SIZE > 0)
-			impl = new L_arr<T>(SIZE);
-		else
-			impl = new L_arr<T>;
-		
-		
-	}
-	else if (mode == 2)
-	{
-		impl = new L_list<T>;
-		
-	}
-	else 
-	{
-		impl = new L_vector<T>;
-		
+	case array:	if (SIZE > 0) impl = new L_arr<T>(SIZE);
+				else impl = new L_arr<T>;
+		break;
+	case list:	impl = new L_list<T>; break;
+	default:impl = new L_arr<T>;
+		break;
 	}
 }
 
@@ -154,7 +143,7 @@ template<typename T>
  inline bool List<double>::rand_push(int n, int precision)
  {
 	srand(time(0));
-	int num = pow(10, precision);
+	int num = (int)pow(10, precision);
 	for (int i = 0; i < n; i++)
 	{
 	 int int_part = rand() % 100;

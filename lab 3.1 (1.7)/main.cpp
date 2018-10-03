@@ -56,8 +56,8 @@ bool b(T d)
 
 void test1() 
 {
-	/*Cycle_*/List<int> L;
-	L.set_mode(2);
+	Cycle_List<int> L;
+	L.set_mode(MODE::list);
 
 	L.add_tail(5);
 	L.add_head(14);
@@ -118,7 +118,7 @@ void test4()
 
 int main()
 {
-	test4();
+	test1();
 	
 
 	system("pause");

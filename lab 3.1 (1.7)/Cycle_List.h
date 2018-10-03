@@ -56,19 +56,16 @@ template<typename T>
 void Cycle_List<T>::set_mode(int mode)
 {
 	delete impl;
-
-	if (mode == 1)
+	switch (mode)
 	{
-		if (SIZE > 0)
-			impl = new L_arr<T>(SIZE);
-		else
-			impl = new L_arr<T>;
+	case array:	if (SIZE > 0) impl = new L_arr<T>(SIZE);
+				else impl = new L_arr<T>; 
+				break;
+	case list:	impl = new L_list<T>; break;
+	default:impl = new L_arr<T>;
+		break;
 	}
-	else if (mode == 2)
-		impl = new L_list<T>;
 
-	else
-		impl = new L_vector<T>;
 }
 
 template<typename T>
@@ -147,7 +144,7 @@ template<>
 inline bool Cycle_List<double>::rand_push(int n, int precision)
 {
 	srand(time(0));
-	int num = pow(10, precision);
+	int num = (int)pow(10, precision);
 	for (int i = 0; i < n; i++)
 	{
 		

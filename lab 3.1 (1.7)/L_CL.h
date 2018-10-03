@@ -4,6 +4,13 @@
 
 using std::function;
 
+enum MODE
+{
+	array,
+	list,
+	vector
+};
+
 template<typename T1>
 class Node
 {
