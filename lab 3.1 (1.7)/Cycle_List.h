@@ -7,6 +7,8 @@
 #include "L_CL.h"
 
 #include<thread>
+#include <ctime>
+#include <cmath>  
 
 using std::function;
 
@@ -36,7 +38,7 @@ public:
 	int search_first_with(function<bool(T)> f);
 	bool rewrite(int i, T d);
 	ptr<T> begin();
-	
+	bool rand_push(int n = 1, int precision = 0);
 
 private:
 	
@@ -121,4 +123,39 @@ template<typename T>
 bool Cycle_List<T>::rewrite(int k, T d)
 {
 	return impl->rewrite(k, d);
+}
+
+
+template<typename T>
+inline bool Cycle_List<T>::rand_push(int n, int precision)
+{
+	return false;
+}
+
+template<>
+inline bool Cycle_List<int>::rand_push(int n, int precision)
+{
+	for (int i = 0; i < n; i++)
+	{
+		int rand_number = rand() % 100;
+		if (!impl->add_tail(rand_number)) return false;
+	}
+	return true;
+}
+
+template<>
+inline bool Cycle_List<double>::rand_push(int n, int precision)
+{
+	srand(time(0));
+	int num = pow(10, precision);
+	for (int i = 0; i < n; i++)
+	{
+		
+		int int_part = rand() % 100;
+		int drob_part = rand() % num;
+		double a = double(drob_part) / num;//rand drob_part
+		double res = double(int_part) + a;
+		if (!impl->add_tail(res)) return false;
+	}
+	return true;
 }

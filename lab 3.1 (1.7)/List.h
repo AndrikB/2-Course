@@ -7,6 +7,8 @@
 #include "L_CL.h"
 
 #include<thread>
+#include <ctime>
+#include <cmath>  
 
 using std::function;
 
@@ -34,6 +36,7 @@ public:
 	T& operator[](int i);
 	int search_first_with (function<bool(T)> f);
 	bool rewrite(int i, T d);
+	bool rand_push(int n = 1, int precision = 0);
 
 	ptr<T> begin();
 private:
@@ -129,3 +132,36 @@ template<typename T>
 {
 	return impl->begin();
 }
+
+ template<typename T>
+ inline bool List<T>::rand_push(int n, int precision)
+ {
+	 return false;
+ }
+
+ template<>
+ inline bool List<int>::rand_push(int n, int precision)
+ {
+	 for (int i = 0; i < n; i++)
+	 {
+		 int rand_number = rand() % 100;
+		 if (!impl->add_tail(rand_number)) return false;
+	 }
+	 return true;
+ }
+
+ template<>
+ inline bool List<double>::rand_push(int n, int precision)
+ {
+	srand(time(0));
+	int num = pow(10, precision);
+	for (int i = 0; i < n; i++)
+	{
+	 int int_part = rand() % 100;
+	 int drob_part = rand() % num;
+	 double a = double(drob_part) / num;//rand drob_part
+	 double res = double(int_part) + a;
+	 if (!impl->add_tail(res)) return false;
+	}
+	return true;
+ }

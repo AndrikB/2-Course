@@ -2,8 +2,7 @@
 #include "L_CL_arr.h"
 #include "L_CL_list.h"
 #include "L_CL_vector.h"
-#include <string>
-#include<utility>
+
 #include "L_CL.h"
 
 #include "List.h"
@@ -11,6 +10,8 @@
 
 #include "Date.h"
 
+#include <string>
+#include<utility>
 #include<thread>
 #include"iterator.h"
 
@@ -91,7 +92,7 @@ void test2()
 
 void test3()
 {
-	List<Date> L;
+	Cycle_List<Date> L;
 	Date d(2018, -12, 31, 0, 0, 0);
 	Date D;
 	interval K;
@@ -108,10 +109,16 @@ void test3()
 	cout << L[1] << endl;
 }
 
+void test4()
+{
+	List<double> L;
+	L.rand_push(5, 4);
+	for (int i = 0; i < 5; i++)cout << L[i] << endl;
+}
+
 int main()
 {
-	test3();
-	Cycle_List<int> L;
+	test4();
 	
 
 	system("pause");
