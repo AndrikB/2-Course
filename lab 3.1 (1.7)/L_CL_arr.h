@@ -47,7 +47,6 @@ L_arr<T>::L_arr()
 {
 	Max = 1000;
 	count = 0;
-	int index = 0;
 	data = new T[Max];
 }
 

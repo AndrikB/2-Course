@@ -106,6 +106,7 @@ void test3()
 	L.add_head(D3);
 	cout << L[2] << endl;
 	cin >> L[1];
+	
 	cout << L[1] << endl;
 }
 
@@ -118,7 +119,8 @@ void test4()
 
 int main()
 {
-	test1();
+	srand(time(0));
+	test3();
 	
 
 	system("pause");

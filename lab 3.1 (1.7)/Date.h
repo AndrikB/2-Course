@@ -39,7 +39,7 @@ public:
 	friend ostream &operator<<(ostream &os, const Date &d);
 	friend istream &operator>>(istream &is, Date &d);
 	void write();
-	bool is_AC() { make_correct(); return (year > 0); }
+	bool is_CE() { make_correct(); return (year > 0); }
 private:
 	int year, month, day, hour, minute, second;
 	void make_correct();

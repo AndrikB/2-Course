@@ -24,7 +24,7 @@ public:
 			impl = new L_arr<T>(SIZE);
 		else
 			impl = new L_arr<T>;
-		this->mode = MODE::arr;
+	
 	}
 	void set_mode(int mode);
 	bool add_tail(T d);
@@ -57,7 +57,7 @@ void List<T>::set_mode(int mode)
 				else impl = new L_arr<T>;
 		break;
 	case list:	impl = new L_list<T>; break;
-	default:impl = new L_arr<T>;
+	default:impl = new L_vector<T>;
 		break;
 	}
 }

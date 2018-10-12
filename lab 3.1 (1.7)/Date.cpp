@@ -174,6 +174,7 @@ ostream &operator<<(ostream &os, const Date &d)
 istream &operator>>(istream &is, Date &d)
 {
 	is >> d.year >> d.month >>  d.day >> d.hour >> d.minute >> d.second;
+	d.make_correct();
 	return is;
 }
 
