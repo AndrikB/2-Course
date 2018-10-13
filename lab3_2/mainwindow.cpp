@@ -42,7 +42,7 @@ void MainWindow::on_Timer_clicked()
 
 void MainWindow::on_Alarm_Clock_clicked()
 {
-    clock=new Alarm_Clock;
-    clock->setWindowTitle("Alarm clock");
-    clock->show();
+    //clock=new Alarm_Clock;
+    clock.setWindowTitle("Alarm clock");
+    clock.show();
 }

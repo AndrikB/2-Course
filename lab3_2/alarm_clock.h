@@ -1,11 +1,9 @@
 #ifndef ALARM_CLOCK_H
 #define ALARM_CLOCK_H
-#include <QDateTime>
-#include <QDialog>
-#include <QInputDialog>
 #include "timer.h"
-#include "bell.h"
-#include <QTimer>
+
+#include "alarm_clock_element.h"
+#include <QInputDialog>
 
 namespace Ui {
 class Alarm_Clock;
@@ -21,15 +19,18 @@ public:
     void set_time();
 private slots:
     void on_Start_alarm_clicked();
-    void clock_bell();
+    void write_list();
+
+
+    void on_rewrite_clicked();
+
+    void on_opposition_clicked();
+
+    void on_Delete_clicked();
 
 private:
     Ui::Alarm_Clock *ui;
-    QTime time;
-    QString st;
-
-    bell sign;
-    bool is_active=true;
+    QVector<alarm_clock_element*> vec;
 };
 
 #endif // ALARM_CLOCK_H

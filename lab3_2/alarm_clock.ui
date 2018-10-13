@@ -6,47 +6,73 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>272</height>
+    <width>333</width>
+    <height>287</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="Time">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>110</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="Start_alarm">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>150</y>
+     <x>30</x>
+     <y>230</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Start</string>
+    <string>Add_new</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>230</y>
-     <width>47</width>
-     <height>13</height>
+     <x>0</x>
+     <y>20</y>
+     <width>331</width>
+     <height>201</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="rewrite">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>260</y>
+     <width>75</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>Rewrite</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="opposition">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>260</y>
+     <width>81</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>make_rewerse</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Delete">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>230</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Delete</string>
    </property>
   </widget>
  </widget>

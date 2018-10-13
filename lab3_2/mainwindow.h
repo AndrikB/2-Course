@@ -22,7 +22,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Timer *timer;
-    Alarm_Clock *clock;
+    Alarm_Clock clock;
 };
 
 #endif // MAINWINDOW_H

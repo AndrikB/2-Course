@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,19 +29,22 @@ SOURCES += \
         mainwindow.cpp \
     timer.cpp \
     alarm_clock.cpp \
-    bell.cpp
+    bell.cpp \
+    alarm_clock_element.cpp
 
 HEADERS += \
         mainwindow.h \
     timer.h \
     alarm_clock.h \
-    bell.h
+    bell.h \
+    alarm_clock_element.h
 
 FORMS += \
         mainwindow.ui \
     timer.ui \
     alarm_clock.ui \
-    bell.ui
+    bell.ui \
+    alarm_clock_element.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
