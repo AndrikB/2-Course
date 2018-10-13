@@ -142,7 +142,6 @@ template<typename T>
  template<>
  inline bool List<double>::rand_push(int n, int precision)
  {
-	srand(time(0));
 	int num = (int)pow(10, precision);
 	for (int i = 0; i < n; i++)
 	{

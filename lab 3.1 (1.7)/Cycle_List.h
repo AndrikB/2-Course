@@ -143,7 +143,6 @@ inline bool Cycle_List<int>::rand_push(int n, int precision)
 template<>
 inline bool Cycle_List<double>::rand_push(int n, int precision)
 {
-	srand(time(0));
 	int num = (int)pow(10, precision);
 	for (int i = 0; i < n; i++)
 	{
