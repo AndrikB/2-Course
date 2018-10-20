@@ -19,6 +19,7 @@ void alarm_clock_element::clock_bell()
         if (time.hour()==QTime::currentTime().hour()&&time.minute()==QTime::currentTime().minute())
         {
             is_active=false;
+            if (not_disturb) return;
             sign =new bell;
             sign->setWindowTitle("ALARM");
             sign->show();

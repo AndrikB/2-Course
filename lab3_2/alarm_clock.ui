@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>333</width>
-    <height>287</height>
+    <width>556</width>
+    <height>317</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="Start_alarm">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>230</y>
+     <x>350</x>
+     <y>220</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -29,31 +29,18 @@
   <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>20</y>
-     <width>331</width>
+     <x>250</x>
+     <y>10</y>
+     <width>281</width>
      <height>201</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="rewrite">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>260</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Rewrite</string>
    </property>
   </widget>
   <widget class="QPushButton" name="opposition">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>260</y>
+     <x>440</x>
+     <y>250</y>
      <width>81</width>
      <height>23</height>
     </rect>
@@ -65,14 +52,76 @@
   <widget class="QPushButton" name="Delete">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>230</y>
+     <x>440</x>
+     <y>220</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Delete</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>191</width>
+     <height>201</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="add_new_list">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>220</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add new list</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Add_to_list">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>220</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add to list</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="delete_list">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Delete list</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="remove_from_list">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>250</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Remove from list</string>
    </property>
   </widget>
  </widget>

@@ -30,21 +30,24 @@ SOURCES += \
     timer.cpp \
     alarm_clock.cpp \
     bell.cpp \
-    alarm_clock_element.cpp
+    alarm_clock_element.cpp \
+    timer_element.cpp
 
 HEADERS += \
         mainwindow.h \
     timer.h \
     alarm_clock.h \
     bell.h \
-    alarm_clock_element.h
+    alarm_clock_element.h \
+    timer_element.h
 
 FORMS += \
         mainwindow.ui \
     timer.ui \
     alarm_clock.ui \
     bell.ui \
-    alarm_clock_element.ui
+    alarm_clock_element.ui \
+    timer_element.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

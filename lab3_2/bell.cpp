@@ -1,6 +1,10 @@
 #include "bell.h"
 #include "ui_bell.h"
 
+bool not_disturb=false;
+
+
+
 bell::bell(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::bell)

@@ -25,8 +25,8 @@ private slots:
 
 private:
     Ui::alarm_clock_element *ui;
-
     bell *sign;
+
 
 };
 

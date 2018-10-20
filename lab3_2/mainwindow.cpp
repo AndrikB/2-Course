@@ -34,15 +34,18 @@ void MainWindow::show_time()
 
 void MainWindow::on_Timer_clicked()
 {
-    timer = new Timer;
-    timer->setWindowTitle("Timer");
-    timer->show();
+    timer.setWindowTitle("Timer");
+    timer.show();
 
 }
 
 void MainWindow::on_Alarm_Clock_clicked()
 {
-    //clock=new Alarm_Clock;
     clock.setWindowTitle("Alarm clock");
     clock.show();
+}
+
+void MainWindow::on_notDisturm_stateChanged(int arg1)
+{
+    not_disturb=!not_disturb;
 }

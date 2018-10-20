@@ -5,6 +5,10 @@
 #include <QDialog>
 #include <QDir>
 #include <QUrl>
+#include <QDateTime>
+
+extern bool not_disturb;
+QTime time_diference(QTime T1, QTime T2);
 
 namespace Ui {
 class bell;
