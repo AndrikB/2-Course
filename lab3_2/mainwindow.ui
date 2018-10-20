@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="Timer">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>20</x>
       <y>10</y>
       <width>75</width>
       <height>23</height>
@@ -86,7 +86,7 @@
      <x>0</x>
      <y>0</y>
      <width>419</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

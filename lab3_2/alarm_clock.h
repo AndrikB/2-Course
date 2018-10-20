@@ -34,13 +34,12 @@ private slots:
 
     void on_add_new_list_clicked();
 
-    void on_Add_to_list_clicked();
-
     void on_delete_list_clicked();
 
-    void on_remove_from_list_clicked();
+    void on_remove_add_from_list_clicked();
 
     void on_pause_continue_List_clicked();
+
 
 private:
     Ui::Alarm_Clock *ui;
