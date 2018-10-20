@@ -60,6 +60,7 @@ QTime time_diference(QTime T1, QTime T2)
 
 void Alarm_Clock::write_list()
 {
+    bool b=true;
     int size=vec.size();//size main list
     int size_list_of_list=list_of_list.size();
     int alarm_el=ui->listWidget->currentRow();//current item
@@ -68,34 +69,124 @@ void Alarm_Clock::write_list()
     int size_list=NULL;//size of current list
     if (list_el!=-1)size_list=list_of_list[list_el]->V.size();
 
-    ui->listWidget->clear();
-    for (int i=0;i<size;i++ )
+    //List widgets
     {
-        QString s;
-        for (int j=0;j<size_list;j++)
-            if (list_of_list[list_el]->V[j]==i)
+        //widget 1
+        ui->listWidget->clear();
+        for (int i=0;i<size;i++ )
+        {
+            QString s;
+            for (int j=0;j<size_list;j++)
+                if (list_of_list[list_el]->V[j]==i)
+                {
+                    s=s+"+";
+                    j=size_list;
+                //if it may be colour cout
+                }
+            s=s+vec[i]->time.toString("hh : mm     |->   ");
+            if (!vec[i]->is_active) s=s+"NULL";
+            else
             {
-                s=s+"+";
-                j=size_list;
-            //if it may be colour cout
+                QTime tmp=time_diference(vec[i]->time, QTime::currentTime());
+                s=s+tmp.toString("hh:mm:ss");
             }
-        s=s+vec[i]->time.toString("hh : mm     |->   ");
-        if (!vec[i]->is_active) s=s+"NULL";
+            ui->listWidget->addItem(s);
+        }
+        ui->listWidget->setCurrentRow(alarm_el);
+
+        //widget 2
+        ui->listWidget_2->clear();
+        for (int i=0;i<size_list_of_list;i++)
+        {
+            ui->listWidget_2->addItem(list_of_list[i]->name);
+        }
+        ui->listWidget_2->setCurrentRow(list_el);
+    }
+
+    //buttons
+    //button pause/continue el
+    if (alarm_el==-1)ui->opposition->setVisible(false);
+    else {
+        ui->opposition->setVisible(true);
+        if (vec[alarm_el]->is_active)
+        {
+            ui->opposition->setText("Stop");
+        }
         else
         {
-            QTime tmp=time_diference(vec[i]->time, QTime::currentTime());
-            s=s+tmp.toString("hh:mm:ss");
+            ui->opposition->setText("Start");
         }
-        ui->listWidget->addItem(s);
     }
-    ui->listWidget->setCurrentRow(alarm_el);
 
-    ui->listWidget_2->clear();
-    for (int i=0;i<size_list_of_list;i++)
+    //button pause/continue opposition list
+    if (size_list>0)
     {
-        ui->listWidget_2->addItem(list_of_list[i]->name);
+        ui->pause_continue_List->setVisible(true);
+        for (int i=0;i<size_list;i++)
+        {
+            if (vec[list_of_list[list_el]->V[i]]->is_active!=true)
+            {
+                b=false;
+                i=size;
+            }
+        }
+        if (b)
+        {
+            ui->pause_continue_List->setText("Start list");
+        }
+        else
+        {
+            ui->pause_continue_List->setText("Stop list");
+        }
     }
-    ui->listWidget_2->setCurrentRow(list_el);
+    else ui->pause_continue_List->setVisible(false);
+
+    //button delete el
+    if (alarm_el==-1) ui->Delete->setVisible(false);
+    else ui->Delete->setVisible(true);
+
+    //button delete list
+    if (list_el==-1) ui->delete_list->setVisible(false);
+    else ui->delete_list->setVisible(true);
+
+    //button remove from list
+    if (list_el==-1||alarm_el==-1) ui->remove_from_list->setVisible(false);
+    else
+    {
+        b=false;
+        for (int i=0;i<size_list;i++)
+        {
+            if (list_of_list[list_el]->V[i]==alarm_el)
+            {
+                b=true;
+                i=size_list;
+            }
+        }
+        if (!b) ui->remove_from_list->setVisible(false);
+        else ui->remove_from_list->setVisible(true);
+
+    }
+
+    //button add to list
+    if (list_el==-1||alarm_el==-1) ui->Add_to_list->setVisible(false);
+    else
+    {
+        b=false;
+        for (int i=0;i<size_list;i++)
+        {
+            if (list_of_list[list_el]->V[i]==alarm_el)
+            {
+                b=true;
+                i=size_list;
+            }
+        }
+        if (b) ui->Add_to_list->setVisible(false);
+        else ui->Add_to_list->setVisible(true);
+    }
+
+
+
+
 }
 
 void Alarm_Clock::on_opposition_clicked()
@@ -118,7 +209,6 @@ void Alarm_Clock::on_add_new_list_clicked()
 {
     list_alarm *list= new list_alarm;
     list->name=QInputDialog::getText(this,"Name", "Write name of list:");
-    qDebug()<<list->V.empty();
     //may be smth check
     list_of_list.push_back(list);
 }
@@ -152,4 +242,23 @@ void Alarm_Clock::on_remove_from_list_clicked()
             return;
         }
     }
+}
+
+void Alarm_Clock::on_pause_continue_List_clicked()
+{
+    bool b=true;
+    int list_el=ui->listWidget_2->currentRow();
+    int size =list_of_list[list_el]->V.size();
+    for (int i=0;i<size;i++)
+    {
+        if (vec[list_of_list[list_el]->V[i]]->is_active!=true)
+        {
+            b=false;
+            i=size;
+        }
+    }
+    b=!b;//make reverse
+    for (int i=0;i<size;i++)
+        vec[list_of_list[list_el]->V[i]]->is_active=b;
+
 }

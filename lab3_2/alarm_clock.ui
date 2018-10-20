@@ -90,7 +90,7 @@
     <rect>
      <x>110</x>
      <y>220</y>
-     <width>75</width>
+     <width>91</width>
      <height>23</height>
     </rect>
    </property>
@@ -115,13 +115,26 @@
    <property name="geometry">
     <rect>
      <x>110</x>
-     <y>250</y>
+     <y>220</y>
      <width>91</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>Remove from list</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pause_continue_List">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>280</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pause list</string>
    </property>
   </widget>
  </widget>

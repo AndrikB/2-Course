@@ -40,6 +40,8 @@ private slots:
 
     void on_remove_from_list_clicked();
 
+    void on_pause_continue_List_clicked();
+
 private:
     Ui::Alarm_Clock *ui;
     QVector<alarm_clock_element*> vec;
