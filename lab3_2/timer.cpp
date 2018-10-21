@@ -227,10 +227,23 @@ void Timer::on_pause_continue_button_clicked()
 
 void Timer::on_Delete_clicked()
 {
-    int index=-1;
-    index=ui->listWidget->currentRow();
-    if (index==-1)return;
+    int index=ui->listWidget->currentRow();
+    int size_list_of_list=list_of_list.size();
+    int size_list;
+    timer_element *t=vec[index];
     vec.remove(index);
+    delete t;
+
+    for (int i=0;i<size_list_of_list;i++)
+    {
+        size_list=list_of_list[i]->V.size();
+        for(int j=0;j<size_list;j++)
+        {
+            if (list_of_list[i]->V[j]==index)
+                list_of_list[i]->V.remove(j);
+            else if (list_of_list[i]->V[j]>index)list_of_list[i]->V[j]--;
+        }
+    }
 }
 
 void Timer::on_add_new_list_clicked()

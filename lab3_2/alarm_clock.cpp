@@ -180,10 +180,24 @@ void Alarm_Clock::on_opposition_clicked()
 
 void Alarm_Clock::on_Delete_clicked()//delete_alarm
 {
-    int i=ui->listWidget->currentRow();
-    if (i<0||i>vec.size()) return;
-    vec.remove(i);
-    this->write_list();
+    int index=ui->listWidget->currentRow();
+    int size_list_of_list=list_of_list.size();
+    int size_list;
+    alarm_clock_element * k =vec[index];
+    vec.remove(index);
+    delete k;
+
+    for (int i=0;i<size_list_of_list;i++)
+    {
+        size_list=list_of_list[i]->V.size();
+        for (int j=0;j<size_list;j++)
+        {
+            if (list_of_list[i]->V[j]==index)
+                list_of_list[i]->V.remove(j);
+            else if (list_of_list[i]->V[j]>index)list_of_list[i]->V[j]--;
+        }
+    }
+
 }
 
 
