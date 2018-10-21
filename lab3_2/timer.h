@@ -40,6 +40,8 @@ private slots:
 
     void on_pause_list_clicked();
 
+    void on_stop_list_clicked();
+
 private:
     Ui::Timer *ui;
     QVector <timer_element*> vec;

@@ -128,20 +128,44 @@ void Timer::write_list()
          else ui->delete_list->setVisible(true);
 
         //button "pause list"
-         if (list_el==-1) ui->pause_list->setVisible(false);
+         if (list_el==-1||size_list<=0) ui->pause_list->setVisible(false);
          else
          {
-             ui->pause_list->setVisible(true);
+             b= true;
+             for (int i=0;i<size_list;i++)
+             {
+                 if (!vec[list_of_list[list_el]->V[i]]->is_active)
+                     b=false;
+             }
+             if (b)
+             {
+                ui->pause_list->setVisible(true);
+                b=false;
+                for (int i=0;i<size_list;i++)
+                {
+                    if (!vec[list_of_list[list_el]->V[i]]->is_not_pause)
+                        b=true;
+                }
+                if (b) ui->pause_list->setText("Resume list");
+                else ui->pause_list->setText("Pause list");
+             }
+             else ui->pause_list->setVisible(false);
+         }
+
+         //button "stop list"
+         if (list_el==-1||size_list<=0) ui->stop_list->setVisible(false);
+         else
+         {
+             ui->stop_list->setVisible(true);
              b=true;
              for (int i=0;i<size_list;i++)
              {
-                 if (vec[list_of_list[list_el]->V[i]]->is_not_pause)
+                 if (!vec[list_of_list[list_el]->V[i]]->is_active)
                      b=false;
              }
-             if (b) ui->pause_list->setText("Pause list");
-             else ui->pause_list->setText("Resume list");
+             if (b) ui->stop_list->setText("Stop list");
+             else ui->stop_list->setText("Start list");
          }
-
     }
 
 }
@@ -170,9 +194,7 @@ void Timer::on_add_new_clicked()
 
 void Timer::on_make_reverse_clicked()//stop
 {
-    int index=-1;
-    index=ui->listWidget->currentRow();
-    if (index==-1)return;
+    int index=ui->listWidget->currentRow();
     if (vec[index]->is_active)
     {
         vec[index]->timer->stop();
@@ -188,7 +210,6 @@ void Timer::on_make_reverse_clicked()//stop
 void Timer::on_pause_continue_button_clicked()
 {
     int index=ui->listWidget->currentRow();
-    if (index==-1)return;
     if (vec[index]->is_not_pause)
     {
         int ms=vec[index]->timer->remainingTime();
@@ -246,13 +267,13 @@ void Timer::on_delete_list_clicked()
 
 void Timer::on_pause_list_clicked()
 {
-    bool b=true;//true - all is active
+    bool b=true;//true - all is active, false - smo is no active
     int  list_el=ui->listWidget_2->currentRow();//current list
     int size_list=list_of_list[list_el]->V.size();//size current list
 
     for (int i=0;i<size_list;i++)
     {
-        if (vec[list_of_list[list_el]->V[i]]->is_not_pause)
+        if (!vec[list_of_list[list_el]->V[i]]->is_not_pause)
             b=false;
     }
 
@@ -276,5 +297,33 @@ void Timer::on_pause_list_clicked()
             vec[index]->timer->start(vec[index]->tmp.msecsSinceStartOfDay());
             vec[index]->is_not_pause=true;
         }
+    }
+}
+
+void Timer::on_stop_list_clicked()
+{
+    bool b=true;//true - all is active
+    int  list_el=ui->listWidget_2->currentRow();//current list
+    int size_list=list_of_list[list_el]->V.size();//size current list
+
+    for (int i=0;i<size_list;i++)
+    {
+        if (!vec[list_of_list[list_el]->V[i]]->is_active)
+            b=false;
+    }
+
+    if (b)
+        for (int i=0;i<size_list;i++)
+        {
+            int index = list_of_list[list_el]->V[i];
+            vec[index]->timer->stop();
+            vec[index]->is_active=false;
+        }
+    else
+        for (int i=0;i<size_list;i++)
+        {
+             int index = list_of_list[list_el]->V[i];
+            vec[index]->timer->start(vec[index]->time.msecsSinceStartOfDay());
+            vec[index]->is_active=true;
     }
 }
