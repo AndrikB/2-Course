@@ -1,7 +1,7 @@
 #include "bell.h"
 #include "ui_bell.h"
 
-bool not_disturb=false;
+/**/bool not_disturb=false;
 
 
 

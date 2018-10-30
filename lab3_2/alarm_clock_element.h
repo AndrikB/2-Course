@@ -17,9 +17,9 @@ class alarm_clock_element : public QDialog
 public:
     explicit alarm_clock_element(QWidget *parent = nullptr);
     ~alarm_clock_element();
-    QTime time;
+    /**/QTime time;
     void sett();
-    bool is_active=true;
+    /**/bool is_active=true;
 private slots:
     void clock_bell();
 

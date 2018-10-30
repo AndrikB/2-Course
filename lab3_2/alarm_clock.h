@@ -4,11 +4,12 @@
 
 #include "alarm_clock_element.h"
 
+QTime alarm_from_str(QString str);
 
 struct list_alarm
 {
-    QVector<int> V;
-    QString name;
+    /**/QVector<int> V;
+    /**/QString name;
 };
 
 namespace Ui {
@@ -22,7 +23,8 @@ class Alarm_Clock : public QDialog
 public:
     explicit Alarm_Clock(QWidget *parent = nullptr);
     ~Alarm_Clock();
-
+    /**/QVector<alarm_clock_element*> vec;
+    /**/QVector<list_alarm*> list_of_list;
     void set_time();
 private slots:
     void on_Start_alarm_clicked();
@@ -43,8 +45,7 @@ private slots:
 
 private:
     Ui::Alarm_Clock *ui;
-    QVector<alarm_clock_element*> vec;
-    QVector<list_alarm*> list_of_list;
+
 
 };
 

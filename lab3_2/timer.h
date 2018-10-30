@@ -5,10 +5,12 @@
 #include "timer_element.h"
 #include <QInputDialog>
 
+QTime time_from_str(QString str);
+
 struct list_timer
 {
-    QVector<int> V;
-    QString name;
+    /**/QVector<int> V;
+    /**/QString name;
 };
 
 namespace Ui {
@@ -22,6 +24,9 @@ class Timer : public QDialog
 public:
     explicit Timer(QWidget *parent = nullptr);
     ~Timer();
+
+    /**/QVector <timer_element*> vec;
+    /**/QVector <list_timer*> list_of_list;
 
 private slots:
     void on_add_new_clicked();
@@ -44,8 +49,7 @@ private slots:
 
 private:
     Ui::Timer *ui;
-    QVector <timer_element*> vec;
-    QVector <list_timer*> list_of_list;
+
 };
 
 #endif // TIMER_H

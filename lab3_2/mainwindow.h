@@ -21,6 +21,13 @@ private slots:
 
     void on_notDisturm_stateChanged(int arg1);
 
+    void on_Save_as_clicked();
+    void save(QString name);
+
+    void on_open_file_clicked();
+    void open(QString name);
+
+    void closeEvent(QCloseEvent *event)override;
 private:
     Ui::MainWindow *ui;
     Timer timer;

@@ -15,6 +15,17 @@ Timer::~Timer()
     delete ui;
 }
 
+QTime time_from_str(QString st)
+{
+    QTime tmp;
+    if (st.isNull())return tmp;
+    int h=st[0].digitValue()*10+st[1].digitValue();
+    int m=st[3].digitValue()*10+st[4].digitValue();
+    int s=st[6].digitValue()*10+st[7].digitValue();
+    tmp.setHMS(h, m, s);
+    return tmp;
+}
+
 void Timer::write_list()
 {
     bool b;
@@ -43,6 +54,7 @@ void Timer::write_list()
             }
 
             s=s+this->vec[i]->time.toString("hh:mm:ss   |->   ");
+
             if (vec[i]->is_active)
             {
                 if (vec[i]->is_not_pause)
@@ -51,6 +63,7 @@ void Timer::write_list()
                     QTime tmp;
                     tmp.setHMS(ms/3600000, (ms/60000)%60,(ms%60000)/1000, ms%1000);
                     s=s+tmp.toString("h:m:s:z");
+
                 }
                 else
                 {
@@ -58,6 +71,7 @@ void Timer::write_list()
                 }
             }
             else s=s+"NULL";
+
             ui->listWidget->addItem(s);
         }
         ui->listWidget->setCurrentRow(timer_el);
@@ -181,11 +195,10 @@ void Timer::on_add_new_clicked()
     }
     if (st[2]!=':'||st[5]!=':') return;
     timer_element *timer = new timer_element;
-    int h=st[0].digitValue()*10+st[1].digitValue();
-    int m=st[3].digitValue()*10+st[4].digitValue();
-    int s=st[6].digitValue()*10+st[7].digitValue();
+
     timer->timer=new QTimer;
-    timer->time.setHMS(h, m, s);
+    timer->time=time_from_str(st);
+    timer->tmp=timer->time;
     if (timer->time.isNull()) return;
     timer->timer->start(timer->time.msecsSinceStartOfDay());
     timer->sett();

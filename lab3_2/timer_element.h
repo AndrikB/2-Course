@@ -18,11 +18,11 @@ public:
     explicit timer_element(QWidget *parent = nullptr);
     ~timer_element();
     QTimer *timer;
-    QTime time;
-    QTime tmp;//if is pause
+    /**/QTime time;
+    /**/QTime tmp;//if is pause
     void sett();
-    bool is_active=true;
-    bool is_not_pause=true;
+    /**/bool is_active=true;
+    /**/bool is_not_pause=true;
 private slots:
     void clock_bell();
 private:

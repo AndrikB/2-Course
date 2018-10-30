@@ -16,6 +16,15 @@ Alarm_Clock::~Alarm_Clock()
     delete ui;
 }
 
+QTime alarm_from_str(QString st)
+{
+    QTime tmp;
+    int h=st[0].digitValue()*10+st[1].digitValue();
+    int m=st[3].digitValue()*10+st[4].digitValue();
+    tmp.setHMS(h, m, 0);
+    return tmp;
+}
+
 void Alarm_Clock::on_Start_alarm_clicked()
 {
 
@@ -26,10 +35,8 @@ void Alarm_Clock::on_Start_alarm_clicked()
         if (!st[i].isDigit()) return;
     }
     //if (st[2]!=':') return;
-    int h=st[0].digitValue()*10+st[1].digitValue();
-    int m=st[3].digitValue()*10+st[4].digitValue();
     alarm_clock_element *tmp= new alarm_clock_element;
-    tmp->time.setHMS(h, m, 0);
+    tmp->time=alarm_from_str(st);
     if (tmp->time.isNull()) return;
     vec.push_back(tmp);
     tmp->sett();
@@ -63,7 +70,8 @@ void Alarm_Clock::write_list()
     bool b=true;
     int size=vec.size();//size main list
     int size_list_of_list=list_of_list.size();
-    int alarm_el=ui->listWidget->currentRow();//current item
+    int alarm_el=-1;
+    alarm_el=ui->listWidget->currentRow();//current item
     int list_el=-1;//current list
     list_el=ui->listWidget_2->currentRow();
     int size_list=NULL;//size of current list
