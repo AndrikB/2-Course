@@ -142,7 +142,7 @@ void MainWindow::open(QString name)
     clock.list_of_list.clear();
     clock.vec.clear();
     QFile fin(name);
-    fin.open(QIODevice::ReadOnly|QIODevice::Text);
+    if (!fin.open(QIODevice::ReadOnly|QIODevice::Text)) return;
     /*
      * struct of files
      * ----------------------

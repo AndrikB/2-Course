@@ -6,7 +6,7 @@
 #include <QDir>
 #include <QUrl>
 #include <QDateTime>
-
+#include <QSound>
 extern bool not_disturb;
 QTime time_diference(QTime T1, QTime T2);
 
