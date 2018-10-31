@@ -10,6 +10,7 @@ bell::bell(QWidget *parent) :
     ui(new Ui::bell)
 {
     ui->setupUi(this);
+
     player = new QMediaPlayer(this);
     QString name =QDir::currentPath();
     qDebug() <<name;

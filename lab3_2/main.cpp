@@ -7,5 +7,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
+    w.setFixedHeight(161);
+    w.setFixedWidth(411);
+
     return a.exec();
 }

@@ -21,7 +21,9 @@ void alarm_clock_element::clock_bell()
             is_active=false;
             if (not_disturb) return;
             sign =new bell;
-            sign->setWindowTitle("ALARM");
+            sign->setWindowTitle("GET UP");
+            sign->setFixedHeight(30);
+            sign->setFixedWidth(170);
             sign->show();
 
         }

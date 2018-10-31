@@ -37,13 +37,16 @@ void MainWindow::on_Timer_clicked()
 {
     timer.setWindowTitle("Timer");
     timer.show();
-
+    timer.setFixedHeight(238);
+    timer.setFixedWidth(528);
 }
 
 void MainWindow::on_Alarm_Clock_clicked()
 {
     clock.setWindowTitle("Alarm clock");
     clock.show();
+    clock.setFixedHeight(238);
+    clock.setFixedWidth(641);
 }
 
 void MainWindow::on_notDisturm_stateChanged(int arg1)

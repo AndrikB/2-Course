@@ -7,7 +7,7 @@ Timer::Timer(QWidget *parent) :
     ui->setupUi(this);
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this,SLOT(write_list()) );
-    timer->start(300);
+    timer->start(6);
 }
 
 Timer::~Timer()
