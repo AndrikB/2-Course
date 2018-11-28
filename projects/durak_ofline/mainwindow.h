@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "operators.h"
 #include "smb_win.h"
+#include <QThread>
 
 namespace Ui {
 class MainWindow;
@@ -25,8 +26,8 @@ public:
     suit_cards trump;//cosir
     bool the_player_s_turn_is_now; //who's turn is now
     bool bot_said_i_take; //bot will take cards
-    bool player_said_i_take=false;
-    bool was_rubbish=false; //if was rubbish in game
+    bool player_said_i_take;
+    bool was_rubbish; //if was rubbish in game
 
     QVector<card> deck_of_all_card_for_bot;//which can be in player
     QVector<card> deck_of_card_which_is_in_player_for_bot;//card can be jocker(
@@ -41,6 +42,7 @@ public:
     void add_card_to_player();
     double value_of_card(card);
     double current_situation();
+    void drop(int );
 private slots:
     void start_game();
     void on_drop_card_clicked();

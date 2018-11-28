@@ -40,7 +40,7 @@ void smb_win::win(bool player)
         way_to_music=way_to_music.left(way_to_music.lastIndexOf(QChar('/')));
         way_to_music+="/durak_ofline/files";
         way_to_gif=way_to_music;
-        way_to_music+="/musik/lose.mp3";
+        way_to_music+="/musik/lose1.mp3";
         way_to_gif+="/gifs/lose.gif";
         sound.setMedia(QUrl(way_to_music));
         sound.play();

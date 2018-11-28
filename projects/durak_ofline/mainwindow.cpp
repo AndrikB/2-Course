@@ -47,6 +47,12 @@ double MainWindow::current_situation()
     //return 0;
 }
 
+void MainWindow::drop(int )
+{
+    this->on_drop_card_clicked();
+}
+
+
 MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -55,8 +61,10 @@ MainWindow::MainWindow(QWidget *parent):
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(all_write()));
     connect(this->win, SIGNAL(start()), this, SLOT(start_game()));
+    connect(this->ui->player_cards, SIGNAL(itemDoubleClicked(QListWidgetItem *)), this, SLOT(on_drop_card_clicked()));
     this->start_game();
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -121,22 +129,44 @@ QColor card_color(card card)
 
 void MainWindow::all_write()
 {
-
-    ui->deck_of_cards->clear();
-    if (card_color(trump_card)==Qt::red)
-        ui->trump->setStyleSheet("QLabel { color : red; }");
-    else
-        ui->trump->setStyleSheet("QLabel { color : dark; }");
-    if (deck_of_cards.isEmpty())
+    //deck of card
     {
-         ui->trump->setText(string_suit[trump]);
-    }
-    else
-    {
-        ui->trump->setText(card_to_qstring(trump_card));
-        ui->deck_of_cards->setText(QString::number(deck_of_cards.size()));
+        ui->deck_of_cards->clear();
+        if (card_color(trump_card)==Qt::red)
+            ui->trump->setStyleSheet("QLabel { color : red; }");
+        else
+            ui->trump->setStyleSheet("QLabel { color : dark; }");
+        if (deck_of_cards.isEmpty())
+        {
+            ui->trump->setText(string_suit[trump]);
+        }
+        else
+        {
+            ui->trump->setText(card_to_qstring(trump_card));
+            ui->deck_of_cards->setText(QString::number(deck_of_cards.size()));
+        }
     }
 
+    //qlabel 'bot said'
+    {
+        if (the_player_s_turn_is_now)
+        {
+            if (bot_said_i_take)
+            {
+                ui->bot_said->setText("Bot said: I take");
+            }
+            else
+            {
+                ui->bot_said->setText("Drop card or take");
+            }
+        }
+        else
+        {
+            ui->bot_said->setText("Drop card or take");
+
+        }
+
+    }
 
     //player cards
     {
@@ -174,18 +204,19 @@ void MainWindow::all_write()
     {
         ui->bot_cards->clear();
         int size_bot_cards=bot_cards.size();
-        for(int i=0;i<size_bot_cards;i++)
-        {
-            if (0)
+        //if (!game_is_go_on)
+            for(int i=0;i<size_bot_cards;i++)
             {
-                ui->bot_cards->addItem(card_to_qstring(bot_cards[i]));
-                ui->bot_cards->item(i)->setForeground(card_color(bot_cards[i]));
+                if (0)
+                {
+                    ui->bot_cards->addItem(card_to_qstring(bot_cards[i]));
+                    ui->bot_cards->item(i)->setForeground(card_color(bot_cards[i]));
+                }
+                else
+                {
+                    ui->bot_cards->addItem("***");
+                }
             }
-            else
-            {
-                ui->bot_cards->addItem("***");
-            }
-        }
     }
 
     //buttons
@@ -223,13 +254,14 @@ void MainWindow::all_write()
 
         }
         if (!ui->player_cards->currentItem())b=false;
+        if (!game_is_go_on)b=false;
         ui->drop_card->setVisible(b);
 
     }
 
     //pas card
     {
-        ui->pas->setVisible(true);
+        ui->pas->setVisible(game_is_go_on);
         if (the_player_s_turn_is_now)
         {
             if (pair_cards.isEmpty())
@@ -257,7 +289,7 @@ void MainWindow::all_write()
 
     }
 
-    check();
+    //check();
 
 }
 
@@ -298,17 +330,12 @@ bool player_turn_first(QVector<card> player, QVector<card> bot, suit_cards trump
         if(is_card_in_QVector(player, tmp)) return true;
         if(is_card_in_QVector(bot, tmp)) return false;
     }
-    //so, wtf
-    qDebug()<<"wtf";
-    exit(1488);
-
+    return false;//whu not?
 }
 
 void MainWindow::shufle_cards()
 {
     int k=36;
-
-
     bot_said_i_take=false;
     player_said_i_take=false;
     was_rubbish=false;
@@ -329,9 +356,6 @@ void MainWindow::shufle_cards()
         tmp_cards.push_back(tmp);
         deck_of_all_card_for_bot.push_back(tmp);
     }
-
-
-
 
     //create new vector of cards
     for (int i=0;i<k;i++)
@@ -376,17 +400,17 @@ void MainWindow::game()
     //the game
     while (game_is_go_on)
     {
+        qDebug()<<"the_player_s_turn_is_now"<<the_player_s_turn_is_now;
         add_card_to_player();//add card to bot and player
-
         if(player_cards.isEmpty())
         {
-
+            check();
             game_is_go_on=false;
             return;
         }
         if (bot_cards.isEmpty())
         {
-
+            check();
             game_is_go_on=false;
             return;
         }
@@ -404,6 +428,7 @@ void MainWindow::game()
             //clear_space
             pair_cards.clear();
         }
+
 
     }
     //end game
@@ -482,6 +507,7 @@ void MainWindow::on_pas_clicked()
     }
     else //if bot turn
     {
+        qDebug()<<"take";
         player_said_i_take=true;
         while(bot_turn_to_attack()) {}
         while (!pair_cards.isEmpty())//TAKE ALL
@@ -491,10 +517,10 @@ void MainWindow::on_pas_clicked()
                 player_cards.push_back(pair_cards[0].second);
             pair_cards.erase(pair_cards.begin());
         }
+
     }
-
+    qDebug()<<2<<the_player_s_turn_is_now;
     game();
-
 
 }
 
@@ -607,6 +633,8 @@ bool MainWindow::bot_can_put_card_for_attack(card card)
 bool MainWindow::bot_turn_to_attack()
 {
     if (bot_cards.isEmpty())return false;
+    if (player_cards.isEmpty())return false;
+    if (pair_cards.size()==5+was_rubbish) return false;
     int count_cards=bot_cards.size();
     int index_min_card=0;
     double cur_sit=current_situation();
@@ -619,7 +647,7 @@ bool MainWindow::bot_turn_to_attack()
             }
     }
 
-    if (bot_can_put_card_for_attack(bot_cards[index_min_card])&&cur_sit>value_of_card(bot_cards[index_min_card]))
+    if (bot_can_put_card_for_attack(bot_cards[index_min_card])&&(cur_sit>value_of_card(bot_cards[index_min_card])||pair_cards.isEmpty()))
     {
         std::pair<card, card> pair;
         pair.first=bot_cards[index_min_card];
@@ -629,6 +657,7 @@ bool MainWindow::bot_turn_to_attack()
         qDebug()<<card_to_qstring(pair.first);
         return true;
     }
+    qDebug()<<"bot not put";
     return false;
 
 
