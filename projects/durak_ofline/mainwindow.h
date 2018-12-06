@@ -5,7 +5,7 @@
 #include "operators.h"
 #include "smb_win.h"
 #include <QThread>
-
+#include <QScrollBar>
 namespace Ui {
 class MainWindow;
 }

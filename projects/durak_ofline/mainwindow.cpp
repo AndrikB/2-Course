@@ -157,7 +157,7 @@ void MainWindow::all_write()
             }
             else
             {
-                ui->bot_said->setText("Drop card or take");
+                ui->bot_said->setText("Drop card");
             }
         }
         else
@@ -171,6 +171,8 @@ void MainWindow::all_write()
     //player cards
     {
         int cur=ui->player_cards->currentRow();
+        QScrollBar *vb = ui->player_cards->verticalScrollBar();
+        int oldValue = vb->value();
         ui->player_cards->clear();
         int size_player_cards=player_cards.size();
         for(int i=0;i<size_player_cards;i++)
@@ -179,6 +181,7 @@ void MainWindow::all_write()
             ui->player_cards->item(i)->setForeground(card_color(player_cards[i]));
         }
         ui->player_cards->setCurrentRow(cur);
+        vb->setValue(oldValue);
 
     }
 
