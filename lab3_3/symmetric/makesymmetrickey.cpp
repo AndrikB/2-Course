@@ -29,9 +29,7 @@ MakeSymmetricKey::~MakeSymmetricKey()
 
 void MakeSymmetricKey::on_save_to_clicked()
 {
-    qDebug()<<1;
-    QString s="C:/Users/blagi/OneDrive/Робочий стіл";
-    QString name=QFileDialog::getSaveFileName(this,tr("Save File"),s , "*.SymmetricKey");
+    QString name=QFileDialog::getSaveFileName(this,tr("Save File"),"", "*.SymmetricKey");
 
     QFile fout(name);
     fout.open(QIODevice::WriteOnly|QIODevice::Text);
