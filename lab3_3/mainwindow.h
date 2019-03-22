@@ -28,24 +28,22 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
     //start step 0
-    void on_make_key_clicked();
-
-    //end step 0
-
-    //start step 1
     void on_symmetric_key_clicked();
 
-    //ens step 1
+    void on_asymmetric_key_clicked();
+    //end step 0
 
     void step_changet();
+
+    //start step 1
+    void on_make_key_clicked();
 
     void on_encrypt_clicked();
 
     void on_decrypt_clicked();
-
-    void on_asymmetric_key_clicked();
+    //ens step 1
 
     void on_back_clicked();
 

@@ -12,7 +12,6 @@ EncryptSymmetric::EncryptSymmetric(QWidget *parent) :
     this->setFixedSize(this->size());
 }
 
-
 EncryptSymmetric::~EncryptSymmetric()
 {
     this->close();

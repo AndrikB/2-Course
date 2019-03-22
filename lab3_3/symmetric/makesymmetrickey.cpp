@@ -16,7 +16,7 @@ MakeSymmetricKey::MakeSymmetricKey(QWidget *parent) :
 
 void MakeSymmetricKey::changed_size_key_slider()
 {
-    ui->size_key->setText("current size "+QString::number(ui->size_key_slider->value()));
+    ui->size_key->setText("current size(bytes) "+QString::number(ui->size_key_slider->value()));
 }
 
 

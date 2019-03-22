@@ -49,3 +49,11 @@ build-durak_ofline-Desktop_Qt_5_11_2_MSVC2017_64bit-Release
 *.exe
 *.out
 *.app
+
+
+#visual paradigm
+.*vpp.*
+*.vpp*
+*.lock
+tmp/
+.vpprefdata

@@ -17,7 +17,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+/*void MainWindow::on_pushButton_clicked()
 {
     QString fileName=QFileDialog::getOpenFileName(this, tr("Chose file with key"), "", "*.SymmetricKey");
     QFile fin(fileName);
@@ -58,7 +58,7 @@ void MainWindow::on_pushButton_clicked()
         qDebug()<<out[i];
     }
 
-}
+}*/
 
 void MainWindow::step_changet()
 {
@@ -138,7 +138,7 @@ void MainWindow::on_symmetric_key_clicked()
     step_changet();
     ui->make_key->setToolTip("generete symetric key for save");
     ui->encrypt->setToolTip("encrypt file using file with key or written key");
-    ui->encrypt->setToolTip("decrypt file using file with key or written key");
+    ui->decrypt->setToolTip("decrypt file using file with key or written key");
 }
 
 
@@ -150,7 +150,7 @@ void MainWindow::on_asymmetric_key_clicked()
     step_changet();
     ui->make_key->setToolTip("generete pair keys for save");
     ui->encrypt->setToolTip("encrypt file using file with key ");
-    ui->encrypt->setToolTip("decrypt file using file with key ");
+    ui->decrypt->setToolTip("decrypt file using file with key ");
 }
 
 void MainWindow::on_back_clicked()
