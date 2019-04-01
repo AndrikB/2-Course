@@ -1,5 +1,5 @@
 #include "makeasymmetrickey.h"
-#include "ui_makeasymmertickey.h"
+#include "ui_makeasymmertickey.h"//I dont understand this error
 
 MakeAsymmetricKey::MakeAsymmetricKey(QWidget *parent) :
     QDialog(parent),

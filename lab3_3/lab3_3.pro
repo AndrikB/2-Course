@@ -1,6 +1,6 @@
-    #-------------------------------------------------
+#-------------------------------------------------
 #
-# Project created by QtCreator 2018-12-01T12:36:45
+# Project created by QtCreator 2019-04-01T19:38:47
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = lab3
+TARGET = lab3_3
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -44,30 +44,30 @@ INCLUDEPATH += C:/OpenSSL-Win64/include
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    symmetric/makesymmetrickey.cpp \
-    symmetric/encryptsymmetric.cpp \
     symmetric/decryptsymmetric.cpp \
-    asymmetric(RSA)/makeasymmetrickey.cpp \
+    symmetric/encryptsymmetric.cpp \
+    symmetric/makesymmetrickey.cpp \
+    asymmetric(RSA)/decryptasymmetric.cpp \
     asymmetric(RSA)/encryptasymmetric.cpp \
-    asymmetric(RSA)/decryptasymmetric.cpp
+    asymmetric(RSA)/makeasymmetrickey.cpp
 
 HEADERS += \
         mainwindow.h \
-    symmetric/makesymmetrickey.h \
-    symmetric/encryptsymmetric.h \
     symmetric/decryptsymmetric.h \
-    asymmetric(RSA)/makeasymmetrickey.h \
+    symmetric/encryptsymmetric.h \
+    symmetric/makesymmetrickey.h \
+    asymmetric(RSA)/decryptasymmetric.h \
     asymmetric(RSA)/encryptasymmetric.h \
-    asymmetric(RSA)/decryptasymmetric.h
+    asymmetric(RSA)/makeasymmetrickey.h
 
 FORMS += \
         mainwindow.ui \
-    symmetric/makesymmetrickey.ui \
-    symmetric/encryptsymmetric.ui \
     symmetric/decryptsymmetric.ui \
-    asymmetric(RSA)/makeasymmetrickey.ui \
+    symmetric/encryptsymmetric.ui \
+    symmetric/makesymmetrickey.ui \
+    asymmetric(RSA)/decryptasymmetric.ui \
     asymmetric(RSA)/encryptasymmetric.ui \
-    asymmetric(RSA)/decryptasymmetric.ui
+    asymmetric(RSA)/makeasymmetrickey.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
