@@ -6,10 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->asymmetric_key->setDisabled(true);
-    step_changet();
-    this->setMaximumSize(this->size());
-    this->setMinimumSize(this->size());
+    QWidget *w=new QWidget;
+    w->setLayout(MainVLayout);
+    setCentralWidget(w);
+
+    set_registration_authorization();
+
 }
 
 MainWindow::~MainWindow()
@@ -17,97 +19,116 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-void MainWindow::step_changet()
+void MainWindow::set_encrypt_decrypt()
 {
-
-    ui->asymmetric_key->setVisible(!step);
-    ui->symmetric_key->setVisible(!step);
-    ui->make_key->setVisible(step);
-    ui->encrypt->setVisible(step);
-    ui->decrypt->setVisible(step);
-    if (step==1)
-    {
-        ui->back->setText("back");
-        ui->info_lbl->setText("Chose action");
+    {//encrypt
+        encryptBTN=new QPushButton("encrypt");
+        connect(encryptBTN, SIGNAL(clicked()), this, SLOT(encrypt()));
+        encryptBTN->setToolTip("encrypt file using file with key or written key");
+        MainVLayout->addWidget(encryptBTN);
     }
-    else
-    {
-        ui->back->setText("exit");
-        ui->info_lbl->setText("Chose type of crypto");
+
+    {//decrypt
+        decryptBTN=new QPushButton("decrypt");
+        connect(decryptBTN, SIGNAL(clicked()), this, SLOT(decrypt()));
+        decryptBTN->setToolTip("decrypt file using file with key or written key");
+        MainVLayout->addWidget(decryptBTN);
+    }
+
+    {//key
+        create_keyBTN=new QPushButton("create key");
+        connect(create_keyBTN, SIGNAL(clicked()), this, SLOT(create_key()));
+        create_keyBTN->setToolTip("generete symetric key for save");
+        MainVLayout->addWidget(create_keyBTN);
     }
 }
 
-void MainWindow::on_make_key_clicked()
+void MainWindow::set_registration_authorization()
 {
-    switch (on_1_step_chose)
+    //registration
     {
-    case 1:
-        make_symmetric_key= new MakeSymmetricKey;
-        connect(make_symmetric_key, SIGNAL(close_wndw()), this, SLOT(make_symmetric_key_nullptr()));
-        break;
+        registrationBTN=new QPushButton("registration");
+        connect(registrationBTN, SIGNAL(clicked()), this, SLOT(registration()));
+        MainVLayout->addWidget(registrationBTN);
+    }
+
+    //authorization
+    {
+        authorizationBTN=new QPushButton("authorization");
+        connect(authorizationBTN, SIGNAL(clicked()), this, SLOT(authorization()));
+        MainVLayout->addWidget(authorizationBTN);
+    }
+
+    //free version
+    {
+        free_versionBTN=new QPushButton("free version");
+        connect(free_versionBTN, SIGNAL(clicked()), this, SLOT(free_version()));
+        MainVLayout->addWidget(free_versionBTN);
     }
 }
 
-void MainWindow::make_symmetric_key_nullptr()
+void MainWindow::delete_registration_authorization()
+{
+    delete registrationBTN;
+    delete authorizationBTN;
+    delete free_versionBTN;
+}
+
+void MainWindow::registration()
+{
+
+}
+
+void MainWindow::authorization()
+{
+
+}
+
+void MainWindow::free_version()
+{
+    delete_registration_authorization();
+    is_authorized=false;
+    set_encrypt_decrypt();
+}
+
+
+void MainWindow::create_key()
+{
+
+    make_symmetric_key= new MakeSymmetricKey;
+    connect(make_symmetric_key, SIGNAL(close_wndw()), this, SLOT(key_nullptr()));
+}
+
+void MainWindow::key_nullptr()
 {
     make_symmetric_key=Q_NULLPTR;
 }
 
-void MainWindow::on_encrypt_clicked()
+void MainWindow::encrypt()
 {
-    switch (on_1_step_chose)
-    {
-    case 1:
-        encrypt_symmetric=new EncryptSymmetric;
-        connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_symmetric_nullptr()));
-        break;
-    }
+    encrypt_symmetric=new EncryptSymmetric;
+    connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_nullptr()));
 }
 
-void MainWindow::encrypt_symmetric_nullptr()
+void MainWindow::encrypt_nullptr()
 {
     encrypt_symmetric=Q_NULLPTR;
 }
 
-void MainWindow::on_decrypt_clicked()
+void MainWindow::decrypt()
 {
-    switch (on_1_step_chose)
-    {
-    case 1:
-        decrypt_symmetric=new DecryptSymmetric;
-        connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_symmetric_nullptr()));
-        break;
-    }
+
+    decrypt_symmetric=new DecryptSymmetric;
+    connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_nullptr()));
+
 }
 
-void MainWindow::decrypt_symmetric_nullptr()
+void MainWindow::decrypt_nullptr()
 {
     decrypt_symmetric=Q_NULLPTR;
 }
 
-void MainWindow::on_symmetric_key_clicked()
-{
-    on_1_step_chose=1;
-    step=1;
-    step_changet();
-    ui->make_key->setToolTip("generete symetric key for save");
-    ui->encrypt->setToolTip("encrypt file using file with key or written key");
-    ui->decrypt->setToolTip("decrypt file using file with key or written key");
-}
 
-
-
-void MainWindow::on_asymmetric_key_clicked()
-{
-    on_1_step_chose=2;
-    step=1;
-    step_changet();
-    ui->make_key->setToolTip("generete pair keys for save");
-    ui->encrypt->setToolTip("encrypt file using file with key ");
-    ui->decrypt->setToolTip("decrypt file using file with key ");
-}
 
 void MainWindow::on_back_clicked()
 {
@@ -115,7 +136,7 @@ void MainWindow::on_back_clicked()
     {
         on_1_step_chose=-1;
         step=0;
-        step_changet();
+        /*step_changet();*/
     }
     else
     {

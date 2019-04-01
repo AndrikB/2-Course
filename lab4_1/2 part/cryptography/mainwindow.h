@@ -10,7 +10,9 @@
 #include <openssl/blowfish.h>
 #include <QDebug>
 #include <QMessageBox>
-
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
 
 namespace Ui {
 class MainWindow;
@@ -25,44 +27,46 @@ public:
     ~MainWindow();
 
 private slots:
-    //void on_pushButton_clicked();
-    //start step 0
-    void on_symmetric_key_clicked();
-
-    void on_asymmetric_key_clicked();
-    //end step 0
-
-    void step_changet();
-
-    //start step 1
-    void on_make_key_clicked();
-
-    void on_encrypt_clicked();
-
-    void on_decrypt_clicked();
-    //ens step 1
 
     void on_back_clicked();
 
 private:
-    Ui::MainWindow *ui;
-    void closeEvent(QCloseEvent *event)override;
 
+    void closeEvent(QCloseEvent *event)override;
     MakeSymmetricKey *make_symmetric_key=Q_NULLPTR;
     EncryptSymmetric *encrypt_symmetric=Q_NULLPTR;
     DecryptSymmetric *decrypt_symmetric=Q_NULLPTR;
-private slots:
-    void make_symmetric_key_nullptr();
-    void encrypt_symmetric_nullptr();
-    void decrypt_symmetric_nullptr();
-private:
-    /*MakeAsymmetricKey *make_asymmetric_key;
-    EncryptAsymmetric *encrypt_asymmetric;
-    DecryptAsymmetric *decrypt_asymmetric;*/
 
+private slots:
+    void key_nullptr();
+    void encrypt_nullptr();
+    void decrypt_nullptr();
+private:
+
+    Ui::MainWindow *ui;
     int step=0;
 
     int on_1_step_chose=-1;//1 - make key; 2 - encrypt; 3 - decrypt
+    void set_encrypt_decrypt();
+    void set_registration_authorization();
+    void delete_registration_authorization();
+
+    bool is_authorized;
+    QVBoxLayout *MainVLayout=new QVBoxLayout;
+    QPushButton *free_versionBTN;
+    QPushButton *authorizationBTN;
+    QPushButton *registrationBTN;
+    QPushButton *encryptBTN;
+    QPushButton *decryptBTN;
+    QPushButton *create_keyBTN;
+
+private slots:
+    void registration();
+    void authorization();
+    void free_version();
+    void create_key();
+    void encrypt();
+    void decrypt();
 };
 
 #endif // MAINWINDOW_H
