@@ -19,29 +19,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::set_encrypt_decrypt()
-{
-    {//encrypt
-        encryptBTN=new QPushButton("encrypt");
-        connect(encryptBTN, SIGNAL(clicked()), this, SLOT(encrypt()));
-        encryptBTN->setToolTip("encrypt file using file with key or written key");
-        MainVLayout->addWidget(encryptBTN);
-    }
 
-    {//decrypt
-        decryptBTN=new QPushButton("decrypt");
-        connect(decryptBTN, SIGNAL(clicked()), this, SLOT(decrypt()));
-        decryptBTN->setToolTip("decrypt file using file with key or written key");
-        MainVLayout->addWidget(decryptBTN);
-    }
-
-    {//key
-        create_keyBTN=new QPushButton("create key");
-        connect(create_keyBTN, SIGNAL(clicked()), this, SLOT(create_key()));
-        create_keyBTN->setToolTip("generete symetric key for save");
-        MainVLayout->addWidget(create_keyBTN);
-    }
-}
 
 void MainWindow::set_registration_authorization()
 {
@@ -65,6 +43,15 @@ void MainWindow::set_registration_authorization()
         connect(free_versionBTN, SIGNAL(clicked()), this, SLOT(free_version()));
         MainVLayout->addWidget(free_versionBTN);
     }
+
+    //exit
+    {
+        exitBTN=new QPushButton("exit");
+        connect(exitBTN, SIGNAL(clicked()), this, SLOT(exit()));
+        MainVLayout->addWidget(exitBTN);
+
+    }
+
 }
 
 void MainWindow::delete_registration_authorization()
@@ -72,6 +59,7 @@ void MainWindow::delete_registration_authorization()
     delete registrationBTN;
     delete authorizationBTN;
     delete free_versionBTN;
+    delete exitBTN;
 }
 
 void MainWindow::registration()
@@ -91,6 +79,60 @@ void MainWindow::free_version()
     set_encrypt_decrypt();
 }
 
+void MainWindow::exit()
+{
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this,"Exit", "Do you really want to leave the WinCrypto?",
+                                     QMessageBox::Yes | QMessageBox::No);
+    if(reply == QMessageBox::Yes){
+           this->close();
+    }
+}
+
+void MainWindow::set_encrypt_decrypt()
+{
+    {//encrypt
+        encryptBTN=new QPushButton("encrypt");
+        connect(encryptBTN, SIGNAL(clicked()), this, SLOT(encrypt()));
+        encryptBTN->setToolTip("encrypt file using file with key or written key");
+        MainVLayout->addWidget(encryptBTN);
+    }
+
+    {//decrypt
+        decryptBTN=new QPushButton("decrypt");
+        connect(decryptBTN, SIGNAL(clicked()), this, SLOT(decrypt()));
+        decryptBTN->setToolTip("decrypt file using file with key or written key");
+        MainVLayout->addWidget(decryptBTN);
+    }
+
+    {//key
+        create_keyBTN=new QPushButton("create key");
+        connect(create_keyBTN, SIGNAL(clicked()), this, SLOT(create_key()));
+        create_keyBTN->setToolTip("generete symetric key for save");
+        MainVLayout->addWidget(create_keyBTN);
+    }
+
+    //back
+    {
+       backBTN=new QPushButton();
+       connect(backBTN, SIGNAL(clicked()), this, SLOT(back()));
+       if (is_authorized) {
+           backBTN->setText("log out");
+       }
+       else {
+           backBTN->setText("back");
+       }
+       MainVLayout->addWidget(backBTN);
+    }
+}
+
+void MainWindow::delete_encrypt_decrypt()
+{
+    delete backBTN;
+    delete create_keyBTN;
+    delete encryptBTN;
+    delete decryptBTN;
+}
 
 void MainWindow::create_key()
 {
@@ -128,25 +170,10 @@ void MainWindow::decrypt_nullptr()
     decrypt_symmetric=Q_NULLPTR;
 }
 
-
-
-void MainWindow::on_back_clicked()
+void MainWindow::back()
 {
-    if (step==1)
-    {
-        on_1_step_chose=-1;
-        step=0;
-        /*step_changet();*/
-    }
-    else
-    {
-        QMessageBox::StandardButton reply;
-           reply = QMessageBox::question(this,"Exit", "Do you really want to leave the WinCrypto?",
-                                         QMessageBox::Yes | QMessageBox::No);
-           if(reply == QMessageBox::Yes){
-               this->close();
-           }
-    }
+    delete_encrypt_decrypt();
+    set_registration_authorization();
 }
 
 void MainWindow::closeEvent(QCloseEvent *)

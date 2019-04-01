@@ -26,10 +26,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-
-    void on_back_clicked();
-
 private:
 
     void closeEvent(QCloseEvent *event)override;
@@ -44,29 +40,36 @@ private slots:
 private:
 
     Ui::MainWindow *ui;
-    int step=0;
 
-    int on_1_step_chose=-1;//1 - make key; 2 - encrypt; 3 - decrypt
     void set_encrypt_decrypt();
+    void delete_encrypt_decrypt();
     void set_registration_authorization();
     void delete_registration_authorization();
 
+
     bool is_authorized;
     QVBoxLayout *MainVLayout=new QVBoxLayout;
+
     QPushButton *free_versionBTN;
     QPushButton *authorizationBTN;
     QPushButton *registrationBTN;
+    QPushButton *exitBTN;
+
     QPushButton *encryptBTN;
     QPushButton *decryptBTN;
     QPushButton *create_keyBTN;
+    QPushButton *backBTN;
 
 private slots:
     void registration();
     void authorization();
     void free_version();
+    void exit();
+
     void create_key();
     void encrypt();
     void decrypt();
+    void back();
 };
 
 #endif // MAINWINDOW_H
