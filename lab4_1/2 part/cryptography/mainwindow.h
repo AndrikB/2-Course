@@ -63,6 +63,7 @@ private:
 private slots:
     void registration();
     void authorization();
+    void end_authorization();
     void free_version();
     void exit();
 
