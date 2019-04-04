@@ -23,17 +23,13 @@ public:
     explicit EncrytpDecryptSymmetric(int enc, QWidget *parent = nullptr);
     ~EncrytpDecryptSymmetric();
 
+    void set_key(QString key, int size);
 private slots:
     void on_old_file_clicked();
-
     void on_convert_clicked();
-
     void on_new_file_clicked();
-
     void on_set_key_clicked();
-
     void on_WriteKey_clicked();
-
     void on_exit_clicked();
 
 signals:
@@ -50,6 +46,7 @@ private:
     void set_all_disable();
     void check_can_convert();
     void set_filename_to_fileLBL(QString filename, QLabel *fileLBL);
+
     void remove_last_n_char(QString filename, int n);
 };
 

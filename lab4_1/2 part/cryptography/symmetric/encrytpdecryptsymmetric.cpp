@@ -33,9 +33,24 @@ void EncrytpDecryptSymmetric::check_can_convert()
     if (key_selected&&!new_filename.isEmpty()&&!old_filename.isEmpty()) ui->convert->setDisabled(false);
 }
 
+void EncrytpDecryptSymmetric::set_key(QString key, int size)
+{
+    unsigned char *str=new unsigned char [static_cast<unsigned>(size)];
+    for (int i=0;i<size;i++)
+        str[i]=static_cast<unsigned char>(key[i].toLatin1());
+
+    ui->password_label->setText("Password: "+key);
+    ui->password_label->setToolTip(key);
+    BF_set_key(this->key, size, str);
+    key_selected=true;
+    delete[] str;
+    check_can_convert();
+}
+
 void EncrytpDecryptSymmetric::on_set_key_clicked()
 {
     set_all_disable();
+    ui->password_label->setText("Password: ");
     key_selected=false;
 
     //chose file with key
@@ -47,47 +62,28 @@ void EncrytpDecryptSymmetric::on_set_key_clicked()
     //read key
     QTextStream FILEin(&fin);
     int size=FILEin.readLine().toInt();
-    unsigned char *str=new unsigned char [static_cast<unsigned>(size)];
-    QString st;
+    QString key;
     for (int i=0;i<size;i++)
     {
-        str[i]=static_cast<unsigned char>(FILEin.readLine().toInt());
-        st+=static_cast<char>(str[i]);
+        key+=static_cast<char>(FILEin.readLine().toInt());
     }
+    set_key(key, size);
 
-    //write key
-    ui->label->setText("Password: "+st);
-    ui->label->setToolTip(st);
-    BF_set_key(key, size, str);
-    key_selected=true;
-    delete[] str;
-
-    check_can_convert();
 }
 
 void EncrytpDecryptSymmetric::on_WriteKey_clicked()
 {
     set_all_disable();
+    ui->password_label->setText("Password: ");
     key_selected=false;
 
     //read key
-    QString st=QInputDialog::getText(this,"password", "Write Password",QLineEdit::Normal);
-    if (st.isEmpty())return;
+    QString key=QInputDialog::getText(this,"password", "Write Password",QLineEdit::Normal);
+    if (key.isEmpty())return;
 
-    //convert key
-    int size=st.length();
-    unsigned char *str=new unsigned char [static_cast<unsigned>(size)];
-    for (int i=0;i<size;i++)
-        str[i]=static_cast<unsigned char>(st[i].toLatin1());
+    int size=key.length();
+    set_key(key, size);
 
-    //write key
-    ui->label->setText("Password: "+st);
-    ui->label->setToolTip(st);
-    BF_set_key(key, size, str);
-    key_selected=true;
-    delete[] str;
-
-    check_can_convert();
 }
 
 void EncrytpDecryptSymmetric::set_filename_to_fileLBL(QString filename, QLabel *fileLBL)

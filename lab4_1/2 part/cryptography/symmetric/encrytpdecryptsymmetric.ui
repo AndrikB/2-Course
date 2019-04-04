@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Encrypt symetric</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="password_label">
    <property name="geometry">
     <rect>
      <x>30</x>
