@@ -162,8 +162,10 @@ void MainWindow::key_nullptr()
 
 void MainWindow::encrypt()
 {
-    encrypt_symmetric=new EncryptSymmetric;
-    connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_nullptr()));
+    /*encrypt_symmetric=new EncryptSymmetric;
+    connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_nullptr()));*/
+    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_ENCRYPT);
+    eds->show();
 }
 
 void MainWindow::encrypt_nullptr()
@@ -173,9 +175,10 @@ void MainWindow::encrypt_nullptr()
 
 void MainWindow::decrypt()
 {
-
-    decrypt_symmetric=new DecryptSymmetric;
-    connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_nullptr()));
+    /*decrypt_symmetric=new DecryptSymmetric;
+    connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_nullptr()));*/
+    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_DECRYPT);
+    eds->show();
 
 }
 

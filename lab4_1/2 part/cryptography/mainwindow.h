@@ -6,6 +6,7 @@
 #include "symmetric/makesymmetrickey.h"
 #include "symmetric/encryptsymmetric.h"
 #include "symmetric/decryptsymmetric.h"
+#include "symmetric/encrytpdecryptsymmetric.h"
 
 #include <openssl/blowfish.h>
 #include <QDebug>
@@ -24,7 +25,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
 private:
 

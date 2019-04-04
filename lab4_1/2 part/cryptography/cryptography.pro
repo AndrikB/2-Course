@@ -46,19 +46,22 @@ SOURCES += \
         mainwindow.cpp \
     symmetric/decryptsymmetric.cpp \
     symmetric/encryptsymmetric.cpp \
-    symmetric/makesymmetrickey.cpp
+    symmetric/makesymmetrickey.cpp \
+    symmetric/encrytpdecryptsymmetric.cpp
 
 HEADERS += \
         mainwindow.h \
     symmetric/decryptsymmetric.h \
     symmetric/encryptsymmetric.h \
-    symmetric/makesymmetrickey.h
+    symmetric/makesymmetrickey.h \
+    symmetric/encrytpdecryptsymmetric.h
 
 FORMS += \
         mainwindow.ui \
     symmetric/decryptsymmetric.ui \
     symmetric/encryptsymmetric.ui \
-    symmetric/makesymmetrickey.ui
+    symmetric/makesymmetrickey.ui \
+    symmetric/encrytpdecryptsymmetric.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

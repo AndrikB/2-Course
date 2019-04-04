@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EncryptSymmetric</class>
- <widget class="QDialog" name="EncryptSymmetric">
+ <class>EncrytpDecryptSymmetric</class>
+ <widget class="QDialog" name="EncrytpDecryptSymmetric">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -73,6 +73,12 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="tabletTracking">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>new file</string>
    </property>
@@ -83,7 +89,7 @@
      <x>10</x>
      <y>80</y>
      <width>191</width>
-     <height>16</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="cursor">
@@ -120,7 +126,7 @@
      <x>10</x>
      <y>110</y>
      <width>191</width>
-     <height>16</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -142,11 +148,17 @@
      <x>10</x>
      <y>170</y>
      <width>281</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
    </property>
    <property name="value">
     <number>0</number>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
    </property>
    <property name="textDirection">
     <enum>QProgressBar::BottomToTop</enum>
