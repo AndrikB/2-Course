@@ -184,44 +184,68 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
     QFile fout(new_filename);
     fout.open(QIODevice::WriteOnly);
 
-    if (enc==BF_ENCRYPT) //add name
-    {
-        QString name_file=old_filename.right(old_filename.length()-old_filename.lastIndexOf(QChar('.'))-1);
-        char c=static_cast<char>(name_file.length());
-        fout.putChar(c);
-        fout.write(name_file.toLatin1());
+    /*name*/{
+        if (enc==BF_ENCRYPT) //add name
+        {
+            QString name_file=old_filename.right(old_filename.length()-old_filename.lastIndexOf(QChar('.'))-1);
+            char c=static_cast<char>(name_file.length());
+            fout.putChar(c);
+            fout.write(name_file.toLatin1());
+        }
+            else //skip name
+        {
+            char *c=new char;
+            fin.getChar(c);
+            QString z;
+            z=fin.read(static_cast<int>(*c));
+            delete c;
+        }
     }
-    else //skip name
-    {
-        char *c=new char;
-        fin.getChar(c);
-        QString z;
-        z=fin.read(static_cast<int>(*c));
-        delete c;
-    }
-
-    qDebug()<<"end name";
     qint64 sizeFile=fin.size();
     qint64 readyCrypt=0;
 
     bool not_end_file=true;
     unsigned char *in=new unsigned char[8], *out=new unsigned char[8];
+    unsigned char *z =new unsigned char[2];
+    char *c=new char;
+    if (enc==BF_DECRYPT)//read first 2 bytes
+    {
+        fin.getChar(c);
+        z[0]=static_cast<unsigned char>(*c);
+        fin.getChar(c);
+        z[1]=static_cast<unsigned char>(*c);
+    }
+    int size=8;
+    int count_zeros_if_end_file=0;
+    int count_real_bytes;
     while (not_end_file)
     {
-        int size=8;
 
         for (int i=0;i<8;i++)
         {
-            char *c=new char;
+            if (enc==BF_DECRYPT)
+            {
+                if (i==0)
+                {
+                    in[0]=z[0];
+                    in[1]=z[1];
+                    i=2;
+                }
+            }
+
             if (!fin.getChar(c))
             {
                 if (enc==BF_ENCRYPT)
                 {
+                    not_end_file=false;
                     size=i;
                     i=8;
                 }
                 else
                 {
+                    qDebug()<<"----------------------------------------------------";
+                    qDebug()<<"bag"<<i;
+                    qDebug()<<"----------------------------------------------------";
                     *c=static_cast<char>(in[0]);
                     fout.close();
                     fin.close();
@@ -244,31 +268,50 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
             {
                 in[i]=static_cast<unsigned char>(*c);
             }
-            delete c;
+            if (enc==BF_DECRYPT)
+            {
+                if (i==7)
+                {
+                    fin.getChar(c);
+                    z[0]=static_cast<unsigned char>(*c);
+                    if (!fin.getChar(c))
+                    {
+                        not_end_file=false;
+                        count_zeros_if_end_file=z[0];
+                        //end file
+
+                    }
+                    else
+                    {
+                        z[1]=static_cast<unsigned char>(*c);
+                    }
+                }
+            }
+
         }
         for (int i=size;i<8;i++)
         {
             in[i]=0;
         }
-
         BF_ecb_encrypt(in, out, key, enc);
 
-        for (int i=0;i<8;i++)
+        count_real_bytes=8-count_zeros_if_end_file;
+        for (int i=0;i<count_real_bytes;i++)
         {
             fout.putChar(static_cast<char>(out[i]));
         }
         if (size!=8)
         {
-            not_end_file=false;
             fout.putChar(static_cast<char>(8-size));
         }
-
         readyCrypt++;
-        ui->progressCrypt->setValue(static_cast<int>(readyCrypt*8*100/sizeFile));
+        if (sizeFile==0)ui->progressCrypt->setValue(100);
+            else ui->progressCrypt->setValue(static_cast<int>(readyCrypt*8*100/sizeFile));
 
     }
     delete[] in;
     delete[] out;
+    delete c;
     fout.close();
     fin.close();
     if (ui->RemoveAfter->checkState())
