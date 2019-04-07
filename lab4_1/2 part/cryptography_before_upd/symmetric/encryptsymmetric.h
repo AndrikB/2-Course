@@ -21,7 +21,7 @@ public:
     explicit EncryptSymmetric(QWidget *parent = nullptr);
     ~EncryptSymmetric();
 
-private slots:
+public slots:
     void on_old_file_clicked();
 
     void on_convert_clicked();
@@ -35,7 +35,7 @@ private slots:
     void on_exit_clicked();
 signals:
     void close_wndw();
-private:
+public:
     Ui::EncryptSymmetric *ui;
     QString new_name;
     QString last_name;

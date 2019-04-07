@@ -23,7 +23,7 @@ public:
 signals:
     void close_wndw();
 
-private slots:
+public slots:
     void on_old_file_clicked();
 
     void on_set_key_clicked();
@@ -36,7 +36,7 @@ private slots:
 
     void on_exit_clicked();
 
-private:
+public:
     Ui::DecryptSymmetric *ui;
     QString new_name;
     QString last_name;

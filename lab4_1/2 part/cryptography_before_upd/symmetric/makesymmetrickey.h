@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <openssl/rand.h>
+
 namespace Ui {
 class MakeSymmetricKey;
 }
