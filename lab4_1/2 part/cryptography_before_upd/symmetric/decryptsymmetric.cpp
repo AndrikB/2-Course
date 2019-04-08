@@ -6,7 +6,6 @@ DecryptSymmetric::DecryptSymmetric(QWidget *parent) :
     ui(new Ui::DecryptSymmetric)
 {
     ui->setupUi(this);
-    this->show();
     ui->new_file->setDisabled(true);
     ui->convert->setDisabled(true);
     this->setFixedSize(this->size());
@@ -117,7 +116,7 @@ void DecryptSymmetric::on_new_file_clicked()
 
 void DecryptSymmetric::on_convert_clicked()
 {
-    qDebug()<<"start decrypt";
+    //qDebug()<<"start decrypt";
     QFile fin(last_name);
     if (!fin.open(QIODevice::ReadOnly)) return;
     QFile fout(new_name);
@@ -148,7 +147,7 @@ void DecryptSymmetric::on_convert_clicked()
                 *c=in[0];
                 fout.close();
                 fin.close();
-                qDebug()<<"end decrypt";
+                //qDebug()<<"end decrypt";
                 rewrite_file(new_name, *c);
                 if (ui->remove_after_chkbx->checkState())
                 {

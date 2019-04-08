@@ -7,7 +7,7 @@ MakeSymmetricKey::MakeSymmetricKey(QWidget *parent) :
     ui(new Ui::MakeSymmetricKey)
 {
     ui->setupUi(this);
-    this->show();
+
 
     connect(ui->size_key_slider, SIGNAL(valueChanged(int)), this, SLOT(changed_size_key_slider()));
     ui->size_key_slider->setValue(32);

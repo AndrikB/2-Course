@@ -6,7 +6,6 @@ EncryptSymmetric::EncryptSymmetric(QWidget *parent) :
     ui(new Ui::EncryptSymmetric)
 {
     ui->setupUi(this);
-    this->show();
     ui->convert->setDisabled(true);
     ui->new_file->setDisabled(true);
     this->setFixedSize(this->size());
@@ -100,7 +99,7 @@ void EncryptSymmetric::on_new_file_clicked()
 
 void EncryptSymmetric::on_convert_clicked()
 {
-    qDebug()<<"start encrypt";
+    //qDebug()<<"start encrypt";
     QFile fin(last_name);
     if (!fin.open(QIODevice::ReadOnly)) return;
     QFile fout(new_name);
@@ -165,7 +164,7 @@ void EncryptSymmetric::on_convert_clicked()
         QFile::remove(last_name);
     }
     ui->progressCrypt->setValue(100);
-    qDebug()<<"end encrypt";
+    //qDebug()<<"end encrypt";
 
 }
 

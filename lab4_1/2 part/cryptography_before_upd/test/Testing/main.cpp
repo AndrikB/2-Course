@@ -7,7 +7,7 @@
 
 const QString first_name="tmp1.tmp";
 const QString second_name="tmp2.tmp";
-const int count_repeats=15;
+const int count_repeats=150;
 
 TEST(TestCaseName, TestName) {
 
@@ -61,6 +61,10 @@ TEST(TestCaseName, TestName) {
         //qDebug()<<"\n"<<text_size<<text<<"\n"<<new_text.size()<<new_text;
 
         EXPECT_EQ(new_text, text);
+
+
+        delete [] str;
+        delete []new_text_c;
     }
 }
 

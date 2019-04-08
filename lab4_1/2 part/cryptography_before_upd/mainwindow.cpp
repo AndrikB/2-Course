@@ -45,6 +45,7 @@ void MainWindow::on_make_key_clicked()
     {
     case 1:
         make_symmetric_key= new MakeSymmetricKey;
+        make_symmetric_key->show();
         connect(make_symmetric_key, SIGNAL(close_wndw()), this, SLOT(make_symmetric_key_nullptr()));
         break;
     }
@@ -61,6 +62,7 @@ void MainWindow::on_encrypt_clicked()
     {
     case 1:
         encrypt_symmetric=new EncryptSymmetric;
+        encrypt_symmetric->show();
         connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_symmetric_nullptr()));
         break;
     }
@@ -77,6 +79,7 @@ void MainWindow::on_decrypt_clicked()
     {
     case 1:
         decrypt_symmetric=new DecryptSymmetric;
+        decrypt_symmetric->show();
         connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_symmetric_nullptr()));
         break;
     }
