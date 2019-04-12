@@ -41,6 +41,11 @@ INCLUDE += C:/OpenSSL-Win64/include
 LIBPATH += C:/OpenSSL-Win64/lib
 INCLUDEPATH += C:/OpenSSL-Win64/include
 
+INCLUDEPATH+="test/testing/googletest"
+INCLUDEPATH+="test/testing/googletest/include"
+INCLUDEPATH+="test/testing/googlemock"
+INCLUDEPATH+="test/testing/googlemock/include"
+
 SOURCES += \
         main.cpp \
         mainwindow.cpp \

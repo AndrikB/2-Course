@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QInputDialog>
 #include <openssl/blowfish.h>
+#include <gtest/gtest.h>
 
 namespace Ui {
 class DecryptSymmetric;
@@ -36,7 +37,7 @@ public slots:
 
     void on_exit_clicked();
 
-public:
+private:
     Ui::DecryptSymmetric *ui;
     QString new_name;
     QString last_name;
@@ -44,6 +45,8 @@ public:
 
     BF_KEY *key= new BF_KEY;
     bool b=false;
+
+    FRIEND_TEST(cryptogragry, encrypt_decrypt);
 };
 
 #endif // DECRYPTSYMMETRIC_H

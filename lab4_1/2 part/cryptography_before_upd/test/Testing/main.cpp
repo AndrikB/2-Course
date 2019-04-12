@@ -9,18 +9,16 @@ const QString first_name="tmp1.tmp";
 const QString second_name="tmp2.tmp";
 const int count_repeats=150;
 
-TEST(TestCaseName, TestName) {
+TEST(cryptogragry, encrypt_decrypt) {
 
     for (int z=0;z<count_repeats;z++) {
 
         int text_size=abs(rand());
         qDebug()<<text_size;
         QString text;
-        //text="qwertyuiopoihgfdsxcvbnjgrrrrrgrvcwxwww,o";
-        for (int i=0;i<text_size;i++) {
+        for (int i=0;i<text_size;i++)
             text+=static_cast<char>(rand()%255);
 
-        }
 
 
         QFile f1(first_name);
@@ -55,9 +53,9 @@ TEST(TestCaseName, TestName) {
         QString new_text;
         f1.open(QIODevice::ReadOnly);
         QTextStream in(&f1);
-        char * new_text_c=new char[f1.size()];
+        char * new_text_c=new char[static_cast<unsigned long long>(f1.size())];
         f1.read(new_text_c, f1.size());
-        new_text=QString::fromUtf8(new_text_c, f1.size());
+        new_text=QString::fromUtf8(new_text_c, static_cast<int>(f1.size()));
         //qDebug()<<"\n"<<text_size<<text<<"\n"<<new_text.size()<<new_text;
 
         EXPECT_EQ(new_text, text);
@@ -70,7 +68,7 @@ TEST(TestCaseName, TestName) {
 
 int main(int argc,char*argv[])
 {
-    srand (time(0));
+    srand (static_cast<unsigned int>(time(nullptr)));
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     QApplication a(argc, argv);
     ::testing::InitGoogleTest(&argc, argv);
