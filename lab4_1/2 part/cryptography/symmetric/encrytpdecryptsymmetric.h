@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QTime>
 
+#include <gtest/gtest.h>
+
 namespace Ui {
 class EncrytpDecryptSymmetric;
 }
@@ -48,6 +50,8 @@ private:
     void set_filename_to_fileLBL(QString filename, QLabel *fileLBL);
 
     void remove_last_n_char(QString filename, int n);
+
+    FRIEND_TEST(cryptogragry, encrypt_decrypt);
 };
 
 #endif // ENCRYTPDECRYPTSYMMETRIC_H

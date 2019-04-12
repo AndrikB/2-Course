@@ -177,8 +177,8 @@ void EncrytpDecryptSymmetric::on_new_file_clicked()
 
 void EncrytpDecryptSymmetric::on_convert_clicked()
 {
-    qDebug()<<"start encrypt ";
-    QTime start=QTime::currentTime();
+    //()<<"start encrypt ";
+    //QTime start=QTime::currentTime();
     QFile fin(old_filename);
     if (!fin.open(QIODevice::ReadOnly)) return;
     QFile fout(new_filename);
@@ -259,7 +259,7 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
                     delete[] in;
                     delete[] out;
                     delete c;
-                    qDebug()<<"end decrypt"<<start.msecsTo(QTime::currentTime())<<"msec";
+                    //qDebug()<<"end decrypt"<<start.msecsTo(QTime::currentTime())<<"msec";
                     return;
                 }
 
@@ -319,7 +319,7 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
         QFile::remove(old_filename);
     }
     ui->progressCrypt->setValue(100);
-    qDebug()<<"end encrypt "<<start.msecsTo(QTime::currentTime())<<"msec";
+    //qDebug()<<"end encrypt "<<start.msecsTo(QTime::currentTime())<<"msec";
 
 }
 
