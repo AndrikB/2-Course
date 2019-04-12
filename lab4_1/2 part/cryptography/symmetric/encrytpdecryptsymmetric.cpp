@@ -9,8 +9,16 @@ EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, QWidget *parent) :
     ui->convert->setDisabled(true);
     ui->new_file->setDisabled(true);
     this->setFixedSize(this->size());
-    if (enc!=BF_ENCRYPT&&enc!=BF_DECRYPT)exit(11);
-
+    if (enc==BF_ENCRYPT) {
+        ui->convert->setText("Encrytp");
+        this->setWindowTitle("Encrypt");
+    }
+    else if (enc==BF_DECRYPT) {
+        ui->convert->setText("Decrypt");
+        this->setWindowTitle("Decrypt");
+    }
+    else exit(11);
+    on_text_radiobtn_clicked();
     this->enc=enc;
 }
 
@@ -92,46 +100,14 @@ void EncrytpDecryptSymmetric::set_filename_to_fileLBL(QString filename, QLabel *
     fileLBL->setToolTip(filename);
 }
 
-void EncrytpDecryptSymmetric::remove_last_n_char(QString filename, int n)
-{
-    QFile fin(filename);
-    fin.open(QIODevice::ReadOnly);
-    QFile fout(filename.left(filename.lastIndexOf(QChar('/'))+1)+"tmp.tmp");
-    fout.open(QIODevice::WriteOnly);
-    char *c=new char;
-    qint64  size=0, originalSize;
-    originalSize=fin.size();
-    size=originalSize-n;
-
-    while (size>0)
-    {
-        ui->progressCrypt->setValue(50+size/originalSize*50);
-
-        fin.getChar(c);
-        fout.putChar(*c);
-        size--;
-    }
-
-    fin.close();
-    fout.close();
-    QFile::remove(filename);
-    QFile::rename(filename.left(filename.lastIndexOf(QChar('/'))+1)+"tmp.tmp", filename);
-    delete c;
-}
-
-void EncrytpDecryptSymmetric::on_old_file_clicked()
+void EncrytpDecryptSymmetric::set_old_and_new_filename(QString s)
 {
     //chose file
-    QString s;
-    if (enc==BF_ENCRYPT)
-        s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.*");
-    else
-        s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.new_rar");
-    if (s.isEmpty())return;
+
     QFile fin(s);
     if (!fin.open(QIODevice::ReadWrite)) return;
     old_filename=s;
-    ui->new_file->setDisabled(false);
+
 
     //auto generation new filename
     if (enc==BF_ENCRYPT)
@@ -149,36 +125,80 @@ void EncrytpDecryptSymmetric::on_old_file_clicked()
 
     fin.close();
 
-    set_filename_to_fileLBL(new_filename, ui->new_file_label);
-    set_filename_to_fileLBL(old_filename, ui->old_file_label);
+
+}
+
+
+
+void EncrytpDecryptSymmetric::on_old_file_clicked()
+{
+    if (ui->text_radiobtn->isChecked())//text
+    {
+        QString text=QInputDialog::getText(this,"Text", "Write text to crypt",QLineEdit::Normal);
+        if (text.size()==0) return;
+        QString s;
+        if (enc==BF_ENCRYPT)
+            s="tmp.tmp";
+        else
+            s="tmp.new_rar";
+
+        QFile f1(s);
+        f1.open(QIODevice::WriteOnly);
+        QTextStream out(&f1);
+        out<<text;
+        f1.close();
+        set_filename_to_fileLBL(text, ui->old_file_label);
+        set_old_and_new_filename(s);
+    }
+    else {//file
+        QString s;
+        if (enc==BF_ENCRYPT)
+            s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.*");
+        else
+            s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.new_rar");
+        if (s.isEmpty())return;
+        set_old_and_new_filename(s);
+
+        ui->new_file->setDisabled(false);
+        set_filename_to_fileLBL(new_filename, ui->new_file_label);
+        set_filename_to_fileLBL(old_filename, ui->old_file_label);
+    }
+
     set_all_disable();
     check_can_convert();
 }
 
 void EncrytpDecryptSymmetric::on_new_file_clicked()
 {
-    QString s;
-    //chose file
-    if (enc==BF_ENCRYPT)
+    if (ui->text_radiobtn->isChecked())//text
     {
-        s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.new_rar");
-    }
-    else
-    {
-        s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.*");
-    }
-    if (!s.isEmpty()) new_filename=s;
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        clipboard->setText(ui->new_file_label->text());
 
-    set_filename_to_fileLBL(new_filename, ui->new_file_label);
+    }
+    else {//file
+        QString s;
+        //chose file
+        if (enc==BF_ENCRYPT)
+        {
+            s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.new_rar");
+        }
+        else
+        {
+            s=QFileDialog::getOpenFileName(this, tr("File to crypt"), "C:/Users/blagi/OneDrive/Робочий стіл/lab4.1.2 test", "*.*");
+        }
+        if (!s.isEmpty()) new_filename=s;
 
-    set_all_disable();
-    check_can_convert();
+        set_filename_to_fileLBL(new_filename, ui->new_file_label);
+
+        set_all_disable();
+        check_can_convert();
+    }
+
 }
 
-void EncrytpDecryptSymmetric::on_convert_clicked()
+void EncrytpDecryptSymmetric::encrypt_decrypt_file()
 {
-    //()<<"start encrypt ";
-    //QTime start=QTime::currentTime();
     QFile fin(old_filename);
     if (!fin.open(QIODevice::ReadOnly)) return;
     QFile fout(new_filename);
@@ -221,7 +241,7 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
     while (not_end_file)
     {
 
-        for (int i=0;i<8;i++)
+        for (int i=0;i<8;i++)//read 8 sybmols
         {
             if (enc==BF_DECRYPT)
             {
@@ -241,26 +261,10 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
                     size=i;
                     i=8;
                 }
-                else
+                else//file was changed. cant decrypt file;
                 {
-                    qDebug()<<"----------------------------------------------------";
-                    qDebug()<<"bag"<<i;
-                    qDebug()<<"----------------------------------------------------";
-                    *c=static_cast<char>(in[0]);
-                    fout.close();
-                    fin.close();
 
-                    remove_last_n_char(new_filename, *c);
-                    if (ui->RemoveAfter->checkState())
-                    {
-                        QFile::remove(old_filename);
-                    }
-                    ui->progressCrypt->setValue(100);
-                    delete[] in;
-                    delete[] out;
-                    delete c;
-                    //qDebug()<<"end decrypt"<<start.msecsTo(QTime::currentTime())<<"msec";
-                    return;
+                    exit(12);
                 }
 
             }
@@ -314,13 +318,32 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
     delete c;
     fout.close();
     fin.close();
-    if (ui->RemoveAfter->checkState())
+    if (ui->RemoveAfter->checkState()||ui->text_radiobtn->isChecked())
     {
         QFile::remove(old_filename);
     }
     ui->progressCrypt->setValue(100);
-    //qDebug()<<"end encrypt "<<start.msecsTo(QTime::currentTime())<<"msec";
+    ui->new_file->setDisabled(false);
+}
 
+
+void EncrytpDecryptSymmetric::on_convert_clicked()
+{
+    if (ui->text_radiobtn->isChecked())//text
+    {
+         encrypt_decrypt_file();
+         QString new_text;
+         QFile f1(new_filename);
+         f1.open(QIODevice::ReadOnly);
+         QTextStream in(&f1);
+         in>>new_text;
+         f1.close();
+
+         set_filename_to_fileLBL(new_text, ui->new_file_label);
+    }
+    else {//file
+        encrypt_decrypt_file();
+    }
 }
 
 void EncrytpDecryptSymmetric::on_exit_clicked()
@@ -329,3 +352,28 @@ void EncrytpDecryptSymmetric::on_exit_clicked()
 }
 
 
+void EncrytpDecryptSymmetric::collapse_all()
+{
+    old_filename="";
+    new_filename="";
+    set_filename_to_fileLBL(new_filename, ui->new_file_label);
+    set_filename_to_fileLBL(old_filename, ui->old_file_label);
+}
+
+void EncrytpDecryptSymmetric::on_text_radiobtn_clicked()
+{
+    collapse_all();
+
+    ui->RemoveAfter->setVisible(false);
+    ui->old_file->setText("set text");
+    ui->new_file->setText("");
+}
+
+void EncrytpDecryptSymmetric::on_file_radiobtn_clicked()
+{
+    collapse_all();
+
+    ui->RemoveAfter->setVisible(true);
+    ui->old_file->setText("old file");
+    ui->new_file->setText("new file");
+}

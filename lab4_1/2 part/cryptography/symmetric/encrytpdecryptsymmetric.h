@@ -10,6 +10,7 @@
 #include <openssl/blowfish.h>
 #include <QLabel>
 #include <QTime>
+#include <QClipboard>
 
 #include <gtest/gtest.h>
 
@@ -34,6 +35,10 @@ private slots:
     void on_WriteKey_clicked();
     void on_exit_clicked();
 
+    void on_text_radiobtn_clicked();
+
+    void on_file_radiobtn_clicked();
+
 signals:
     void close_wndw();
 private:
@@ -49,7 +54,9 @@ private:
     void check_can_convert();
     void set_filename_to_fileLBL(QString filename, QLabel *fileLBL);
 
-    void remove_last_n_char(QString filename, int n);
+    void set_old_and_new_filename(QString s);
+    void encrypt_decrypt_file();
+    void collapse_all();
 
     FRIEND_TEST(cryptogragry, encrypt_decrypt);
 };
