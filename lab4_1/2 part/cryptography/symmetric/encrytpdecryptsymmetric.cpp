@@ -28,7 +28,6 @@ EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, bool is_authorizated, 
 
 EncrytpDecryptSymmetric::~EncrytpDecryptSymmetric()
 {
-    this->close();
     delete ui;
     delete key;
     emit close_wndw();
@@ -336,6 +335,10 @@ void EncrytpDecryptSymmetric::encrypt_decrypt_file()
     if (is_authorizated)ui->new_file->setDisabled(false);
 }
 
+void EncrytpDecryptSymmetric::closeEvent(QCloseEvent *)
+{
+    emit close_wndw();
+}
 
 void EncrytpDecryptSymmetric::on_convert_clicked()
 {
@@ -361,8 +364,7 @@ void EncrytpDecryptSymmetric::on_exit_clicked()
     this->~EncrytpDecryptSymmetric();
 }
 
-
-void EncrytpDecryptSymmetric::collapse_all()
+void EncrytpDecryptSymmetric::clear_all()
 {
     old_filename="";
     new_filename="";
@@ -373,7 +375,7 @@ void EncrytpDecryptSymmetric::collapse_all()
 
 void EncrytpDecryptSymmetric::on_text_radiobtn_clicked()
 {
-    collapse_all();
+    clear_all();
 
     ui->RemoveAfter->setVisible(false);
     ui->old_file->setText("set text");
@@ -382,7 +384,7 @@ void EncrytpDecryptSymmetric::on_text_radiobtn_clicked()
 
 void EncrytpDecryptSymmetric::on_file_radiobtn_clicked()
 {
-    collapse_all();
+    clear_all();
 
     ui->RemoveAfter->setVisible(true);
     ui->old_file->setText("old file");

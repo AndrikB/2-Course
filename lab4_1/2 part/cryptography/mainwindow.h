@@ -31,9 +31,10 @@ public:
 private:
 
     void closeEvent(QCloseEvent *event)override;
+    //void close_all_window
     MakeSymmetricKey *make_symmetric_key=Q_NULLPTR;
-    EncryptSymmetric *encrypt_symmetric=Q_NULLPTR;
-    DecryptSymmetric *decrypt_symmetric=Q_NULLPTR;
+    EncrytpDecryptSymmetric *encrypt_symmetric=Q_NULLPTR;
+    EncrytpDecryptSymmetric *decrypt_symmetric=Q_NULLPTR;
 
 private slots:
     void key_nullptr();
@@ -47,6 +48,7 @@ private:
     void delete_encrypt_decrypt();
     void set_registration_authorization();
     void delete_registration_authorization();
+    void close_subwindows();
 
 
     bool is_authorized;

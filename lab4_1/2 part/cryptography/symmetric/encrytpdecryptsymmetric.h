@@ -56,7 +56,7 @@ private:
 
     void set_all_disable();
     void check_can_convert();
-    void collapse_all();
+    void clear_all();
     void set_not_authorizated();
 
     void set_key(QString key, int size);
@@ -65,7 +65,7 @@ private:
 
     void encrypt_decrypt_file();
 
-
+    void closeEvent(QCloseEvent *event)override;
     FRIEND_TEST(cryptogragry, encrypt_decrypt);
 };
 

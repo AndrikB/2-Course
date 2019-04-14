@@ -28,6 +28,8 @@ signals:
 private:
     Ui::MakeSymmetricKey *ui;
     unsigned char *str;
+
+    void closeEvent(QCloseEvent *event)override;
 };
 
 #endif // MAKESYMMETRICKEY_H

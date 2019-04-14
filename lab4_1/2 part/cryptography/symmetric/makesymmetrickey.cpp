@@ -52,3 +52,8 @@ void MakeSymmetricKey::on_exit_clicked()
 {
     this->~MakeSymmetricKey();
 }
+
+void MakeSymmetricKey::closeEvent(QCloseEvent *)
+{
+    emit close_wndw();
+}

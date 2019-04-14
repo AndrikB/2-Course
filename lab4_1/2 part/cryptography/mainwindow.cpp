@@ -157,8 +157,12 @@ void MainWindow::delete_encrypt_decrypt()
 
 void MainWindow::create_key()
 {
-    make_symmetric_key= new MakeSymmetricKey;
-    connect(make_symmetric_key, SIGNAL(close_wndw()), this, SLOT(key_nullptr()));
+    if (!make_symmetric_key){
+        make_symmetric_key= new MakeSymmetricKey;
+        connect(make_symmetric_key, SIGNAL(close_wndw()), this, SLOT(key_nullptr()));
+    }
+    make_symmetric_key->activateWindow();
+
 }
 
 void MainWindow::key_nullptr()
@@ -168,10 +172,13 @@ void MainWindow::key_nullptr()
 
 void MainWindow::encrypt()
 {
-    /*encrypt_symmetric=new EncryptSymmetric;
-    connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_nullptr()));*/
-    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_ENCRYPT,is_authorized);
-    eds->show();
+    if (encrypt_symmetric==Q_NULLPTR){
+        encrypt_symmetric=new EncrytpDecryptSymmetric(BF_ENCRYPT,is_authorized);
+        encrypt_symmetric->show();
+        connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_nullptr()));
+    }
+
+    encrypt_symmetric->activateWindow();
 }
 
 void MainWindow::encrypt_nullptr()
@@ -181,10 +188,13 @@ void MainWindow::encrypt_nullptr()
 
 void MainWindow::decrypt()
 {
-    /*decrypt_symmetric=new DecryptSymmetric;
-    connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_nullptr()));*/
-    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_DECRYPT,is_authorized);
-    eds->show();
+    if (!decrypt_symmetric){
+        decrypt_symmetric=new EncrytpDecryptSymmetric(BF_DECRYPT,is_authorized);
+        decrypt_symmetric->show();
+        connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_nullptr()));
+    }
+
+    decrypt_symmetric->activateWindow();
 
 }
 
@@ -197,11 +207,17 @@ void MainWindow::back()
 {
     delete_encrypt_decrypt();
     set_registration_authorization();
+    close_subwindows();
 }
 
-void MainWindow::closeEvent(QCloseEvent *)
+void MainWindow::close_subwindows()
 {
     if (this->decrypt_symmetric) this->decrypt_symmetric->close();
     if (this->encrypt_symmetric) this->encrypt_symmetric->close();
     if (this->make_symmetric_key)this->make_symmetric_key->close();
+}
+
+void MainWindow::closeEvent(QCloseEvent *)
+{
+    close_subwindows();
 }
