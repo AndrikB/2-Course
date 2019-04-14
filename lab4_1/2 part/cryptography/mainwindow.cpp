@@ -61,13 +61,17 @@ void MainWindow::delete_registration_authorization()
 
 void MainWindow::registration()
 {
-
+    QString link = "http://www.google.com";
+    QDesktopServices::openUrl(QUrl(link));
 }
 
 void MainWindow::authorization()
 {
-    QString login=QInputDialog::getText(this,"Login", "Write Login");
-    QString password=QInputDialog::getText(this,"Password", "Write Password");
+    QString login;
+    QString password;
+    login=QInputDialog::getText(this,"Login", "Write Login");
+    if (!login.isEmpty())
+    password=QInputDialog::getText(this,"Password", "Write Password");
     if (login=="login"&&password=="password")end_authorization();
     else {
         QMessageBox::StandardButton reply;

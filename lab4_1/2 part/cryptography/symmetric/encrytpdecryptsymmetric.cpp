@@ -358,6 +358,7 @@ void EncrytpDecryptSymmetric::collapse_all()
     new_filename="";
     set_filename_to_fileLBL(new_filename, ui->new_file_label);
     set_filename_to_fileLBL(old_filename, ui->old_file_label);
+    set_all_disable();
 }
 
 void EncrytpDecryptSymmetric::on_text_radiobtn_clicked()
@@ -366,7 +367,7 @@ void EncrytpDecryptSymmetric::on_text_radiobtn_clicked()
 
     ui->RemoveAfter->setVisible(false);
     ui->old_file->setText("set text");
-    ui->new_file->setText("");
+    ui->new_file->setText("copy");
 }
 
 void EncrytpDecryptSymmetric::on_file_radiobtn_clicked()

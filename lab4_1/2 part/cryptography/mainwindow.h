@@ -14,6 +14,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QDesktopServices>
 
 namespace Ui {
 class MainWindow;
