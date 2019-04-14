@@ -67,6 +67,8 @@ void MainWindow::registration()
 
 void MainWindow::authorization()
 {
+    end_authorization();
+    return;
     QString login;
     QString password;
     login=QInputDialog::getText(this,"Login", "Write Login");
@@ -168,7 +170,7 @@ void MainWindow::encrypt()
 {
     /*encrypt_symmetric=new EncryptSymmetric;
     connect(encrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(encrypt_nullptr()));*/
-    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_ENCRYPT);
+    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_ENCRYPT,is_authorized);
     eds->show();
 }
 
@@ -181,7 +183,7 @@ void MainWindow::decrypt()
 {
     /*decrypt_symmetric=new DecryptSymmetric;
     connect(decrypt_symmetric, SIGNAL(close_wndw()), this, SLOT(decrypt_nullptr()));*/
-    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_DECRYPT);
+    EncrytpDecryptSymmetric *eds=new EncrytpDecryptSymmetric(BF_DECRYPT,is_authorized);
     eds->show();
 
 }

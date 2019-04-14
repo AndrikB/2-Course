@@ -1,7 +1,7 @@
 #include "encrytpdecryptsymmetric.h"
 #include "ui_encrytpdecryptsymmetric.h"
 
-EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, QWidget *parent) :
+EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, bool is_authorizated, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EncrytpDecryptSymmetric)
 {
@@ -18,8 +18,12 @@ EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, QWidget *parent) :
         this->setWindowTitle("Decrypt");
     }
     else exit(11);
+
     on_text_radiobtn_clicked();
     this->enc=enc;
+    this->is_authorizated=is_authorizated;
+    if (!is_authorizated) set_not_authorizated();
+
 }
 
 EncrytpDecryptSymmetric::~EncrytpDecryptSymmetric()
@@ -28,6 +32,13 @@ EncrytpDecryptSymmetric::~EncrytpDecryptSymmetric()
     delete ui;
     delete key;
     emit close_wndw();
+}
+
+void EncrytpDecryptSymmetric::set_not_authorizated()
+{
+    ui->file_radiobtn->setDisabled(true);
+    ui->file_radiobtn->setToolTip("You are not authorizated");
+    ui->new_file->setToolTip("You are not authorizated");
 }
 
 void EncrytpDecryptSymmetric::set_all_disable()
@@ -127,8 +138,6 @@ void EncrytpDecryptSymmetric::set_old_and_new_filename(QString s)
 
 
 }
-
-
 
 void EncrytpDecryptSymmetric::on_old_file_clicked()
 {
@@ -297,6 +306,7 @@ void EncrytpDecryptSymmetric::encrypt_decrypt_file()
         {
             in[i]=0;
         }
+
         BF_ecb_encrypt(in, out, key, enc);
 
         count_real_bytes=8-count_zeros_if_end_file;
@@ -323,7 +333,7 @@ void EncrytpDecryptSymmetric::encrypt_decrypt_file()
         QFile::remove(old_filename);
     }
     ui->progressCrypt->setValue(100);
-    ui->new_file->setDisabled(false);
+    if (is_authorizated)ui->new_file->setDisabled(false);
 }
 
 
@@ -332,11 +342,11 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
     if (ui->text_radiobtn->isChecked())//text
     {
          encrypt_decrypt_file();
-         QString new_text;
          QFile f1(new_filename);
          f1.open(QIODevice::ReadOnly);
+         QString new_text;
          QTextStream in(&f1);
-         in>>new_text;
+         new_text=in.read(f1.size());
          f1.close();
 
          set_filename_to_fileLBL(new_text, ui->new_file_label);
