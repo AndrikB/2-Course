@@ -1,7 +1,7 @@
 #include "encrytpdecryptsymmetric.h"
 #include "ui_encrytpdecryptsymmetric.h"
 
-EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, bool is_authorizated, QWidget *parent) :
+EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, bool is_authorized, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EncrytpDecryptSymmetric)
 {
@@ -21,8 +21,8 @@ EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, bool is_authorizated, 
 
     on_text_radiobtn_clicked();
     this->enc=enc;
-    this->is_authorizated=is_authorizated;
-    if (!is_authorizated) set_not_authorizated();
+    this->is_authorized=is_authorized;
+    if (!is_authorized) set_not_authorizated();
 
 }
 
@@ -332,7 +332,7 @@ void EncrytpDecryptSymmetric::encrypt_decrypt_file()
         QFile::remove(old_filename);
     }
     ui->progressCrypt->setValue(100);
-    if (is_authorizated)ui->new_file->setDisabled(false);
+    if (is_authorized)ui->new_file->setDisabled(false);
 }
 
 void EncrytpDecryptSymmetric::closeEvent(QCloseEvent *)

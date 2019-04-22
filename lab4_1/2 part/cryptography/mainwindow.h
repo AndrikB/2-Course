@@ -4,8 +4,6 @@
 #include <QMainWindow>
 
 #include "symmetric/makesymmetrickey.h"
-#include "symmetric/encryptsymmetric.h"
-#include "symmetric/decryptsymmetric.h"
 #include "symmetric/encrytpdecryptsymmetric.h"
 
 #include <openssl/blowfish.h>
@@ -31,7 +29,6 @@ public:
 private:
 
     void closeEvent(QCloseEvent *event)override;
-    //void close_all_window
     MakeSymmetricKey *make_symmetric_key=Q_NULLPTR;
     EncrytpDecryptSymmetric *encrypt_symmetric=Q_NULLPTR;
     EncrytpDecryptSymmetric *decrypt_symmetric=Q_NULLPTR;

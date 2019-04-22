@@ -67,8 +67,8 @@ void MainWindow::registration()
 
 void MainWindow::authorization()
 {
-    end_authorization();
-    return;
+    /**end_authorization();
+    return;/**/
     QString login;
     QString password;
     login=QInputDialog::getText(this,"Login", "Write Login");
@@ -106,7 +106,7 @@ void MainWindow::exit()
     reply = QMessageBox::question(this,"Exit", "Do you really want to leave the WinCrypto?",
                                      QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes){
-           this->close();
+        this->close();
     }
 }
 

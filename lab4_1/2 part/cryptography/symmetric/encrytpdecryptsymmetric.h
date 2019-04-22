@@ -23,8 +23,8 @@ class EncrytpDecryptSymmetric : public QDialog
     Q_OBJECT
 
 public:
-    explicit EncrytpDecryptSymmetric(int enc, bool is_authorizated, QWidget *parent = nullptr);
-    ~EncrytpDecryptSymmetric();
+    explicit EncrytpDecryptSymmetric(int enc, bool is_authorized, QWidget *parent = nullptr);
+    ~EncrytpDecryptSymmetric()override;
 
 
 private slots:
@@ -47,7 +47,7 @@ signals:
 private:
     Ui::EncrytpDecryptSymmetric *ui;
     int enc;
-    bool is_authorizated;
+    bool is_authorized;
     QString new_filename;
     QString old_filename;
 

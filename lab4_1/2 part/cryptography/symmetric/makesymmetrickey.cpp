@@ -36,7 +36,7 @@ void MakeSymmetricKey::on_save_to_clicked()
     QTextStream out(&fout);
 
     int size=ui->size_key_slider->value();
-    str = new unsigned char [static_cast<unsigned>(size)];
+    unsigned char *str = new unsigned char [static_cast<unsigned>(size)];
     RAND_bytes(str, size);
 
     out<<size<<endl;

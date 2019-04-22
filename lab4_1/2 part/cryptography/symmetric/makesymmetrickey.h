@@ -15,7 +15,7 @@ class MakeSymmetricKey : public QDialog
 
 public:
     explicit MakeSymmetricKey(QWidget *parent = nullptr);
-    ~MakeSymmetricKey();
+    ~MakeSymmetricKey() override;
 
 private slots:
     void on_save_to_clicked();
@@ -27,7 +27,6 @@ signals:
     void close_wndw();
 private:
     Ui::MakeSymmetricKey *ui;
-    unsigned char *str;
 
     void closeEvent(QCloseEvent *event)override;
 };
