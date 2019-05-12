@@ -1,5 +1,6 @@
 #include "decryptsymmetric.h"
 #include "ui_decryptsymmetric.h"
+#include <QElapsedTimer>
 
 DecryptSymmetric::DecryptSymmetric(QWidget *parent) :
     QDialog(parent),
@@ -116,7 +117,9 @@ void DecryptSymmetric::on_new_file_clicked()
 
 void DecryptSymmetric::on_convert_clicked()
 {
-    //qDebug()<<"start decrypt";
+    qDebug()<<"start decrypt";
+    QElapsedTimer t;
+    t.start();
     QFile fin(last_name);
     if (!fin.open(QIODevice::ReadOnly)) return;
     QFile fout(new_name);
@@ -157,6 +160,8 @@ void DecryptSymmetric::on_convert_clicked()
                 delete[] in;
                 delete[] out;
                 delete c;
+                qDebug()<<t.elapsed();
+                qDebug()<<"end encrypt";
                 return;
 
             }

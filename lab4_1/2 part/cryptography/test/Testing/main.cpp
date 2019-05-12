@@ -9,7 +9,7 @@ const QString first_name="tmp1.tmp";
 const QString second_name="tmp2.tmp";
 const int count_repeats=15;
 
-TEST(cryptogragry, encrypt_decrypt) {
+TEST(cryptogragry, encrypt_decrypt_file) {
 
     for (int z=0;z<count_repeats;z++) {
 
@@ -31,8 +31,7 @@ TEST(cryptogragry, encrypt_decrypt) {
         unsigned char *str = new unsigned char [static_cast<unsigned long long>(key_size)];
         RAND_bytes(str, key_size);
 
-        EncrytpDecryptSymmetric *enc=new EncrytpDecryptSymmetric(BF_ENCRYPT);
-        enc->close();
+        EncrytpDecryptSymmetric *enc=new EncrytpDecryptSymmetric(BF_ENCRYPT, true);
         BF_set_key(enc->key, key_size, str);
         enc->old_filename=first_name;
         enc->new_filename=second_name;
@@ -42,8 +41,7 @@ TEST(cryptogragry, encrypt_decrypt) {
         QFile::remove(first_name);
 
 
-        EncrytpDecryptSymmetric *dec=new EncrytpDecryptSymmetric(BF_DECRYPT);
-        dec->close();
+        EncrytpDecryptSymmetric *dec=new EncrytpDecryptSymmetric(BF_DECRYPT, true);
         BF_set_key(dec->key, key_size, str);
         dec->old_filename=second_name;
         dec->new_filename=first_name;

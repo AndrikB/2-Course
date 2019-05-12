@@ -9,7 +9,6 @@
 #include <QInputDialog>
 #include <openssl/blowfish.h>
 #include <QLabel>
-#include <QTime>
 #include <QClipboard>
 
 #include <gtest/gtest.h>
@@ -66,7 +65,7 @@ private:
     void encrypt_decrypt_file();
 
     void closeEvent(QCloseEvent *event)override;
-    FRIEND_TEST(cryptogragry, encrypt_decrypt);
+    FRIEND_TEST(cryptogragry, encrypt_decrypt_file);
 };
 
 #endif // ENCRYTPDECRYPTSYMMETRIC_H

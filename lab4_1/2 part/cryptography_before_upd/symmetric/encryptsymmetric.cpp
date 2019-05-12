@@ -1,5 +1,6 @@
 #include "encryptsymmetric.h"
 #include "ui_encryptsymmetric.h"
+#include <QElapsedTimer>
 
 EncryptSymmetric::EncryptSymmetric(QWidget *parent) :
     QDialog(parent),
@@ -99,7 +100,9 @@ void EncryptSymmetric::on_new_file_clicked()
 
 void EncryptSymmetric::on_convert_clicked()
 {
-    //qDebug()<<"start encrypt";
+    qDebug()<<"start encrypt";
+    QElapsedTimer t;
+    t.start();
     QFile fin(last_name);
     if (!fin.open(QIODevice::ReadOnly)) return;
     QFile fout(new_name);
@@ -155,6 +158,7 @@ void EncryptSymmetric::on_convert_clicked()
         delete[] out;
         readyCrypt++;
         ui->progressCrypt->setValue(readyCrypt*8*100/sizeFile);
+        if (readyCrypt*80%sizeFile<80) qDebug()<<readyCrypt*800/sizeFile;
 
     }
     fout.close();
@@ -164,8 +168,8 @@ void EncryptSymmetric::on_convert_clicked()
         QFile::remove(last_name);
     }
     ui->progressCrypt->setValue(100);
-    //qDebug()<<"end encrypt";
-
+    qDebug()<<t.elapsed();
+    qDebug()<<"end encrypt";
 }
 
 void EncryptSymmetric::on_exit_clicked()

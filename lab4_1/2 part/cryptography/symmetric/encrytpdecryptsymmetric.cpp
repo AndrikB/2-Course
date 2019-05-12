@@ -1,5 +1,6 @@
 #include "encrytpdecryptsymmetric.h"
 #include "ui_encrytpdecryptsymmetric.h"
+#include <QElapsedTimer>
 
 EncrytpDecryptSymmetric::EncrytpDecryptSymmetric(int enc, bool is_authorized, QWidget *parent) :
     QDialog(parent),
@@ -207,6 +208,7 @@ void EncrytpDecryptSymmetric::on_new_file_clicked()
 
 void EncrytpDecryptSymmetric::encrypt_decrypt_file()
 {
+
     QFile fin(old_filename);
     if (!fin.open(QIODevice::ReadOnly)) return;
     QFile fout(new_filename);
@@ -342,6 +344,10 @@ void EncrytpDecryptSymmetric::closeEvent(QCloseEvent *)
 
 void EncrytpDecryptSymmetric::on_convert_clicked()
 {
+    qDebug()<<"start encrypt";
+    QElapsedTimer t;
+    t.start();
+
     if (ui->text_radiobtn->isChecked())//text
     {
          encrypt_decrypt_file();
@@ -357,6 +363,8 @@ void EncrytpDecryptSymmetric::on_convert_clicked()
     else {//file
         encrypt_decrypt_file();
     }
+    qDebug()<<t.elapsed();
+    qDebug()<<"end encrypt";
 }
 
 void EncrytpDecryptSymmetric::on_exit_clicked()

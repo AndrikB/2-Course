@@ -33,24 +33,18 @@ SOURCES += \
     main.cpp \
     ../../main.cpp \
     ../../mainwindow.cpp \
-    ../../symmetric/decryptsymmetric.cpp \
-    ../../symmetric/encryptsymmetric.cpp \
     ../../symmetric/encrytpdecryptsymmetric.cpp \
     ../../symmetric/makesymmetrickey.cpp
 
 
 FORMS += \
     ../../mainwindow.ui \
-    ../../symmetric/decryptsymmetric.ui \
-    ../../symmetric/encryptsymmetric.ui \
     ../../symmetric/encrytpdecryptsymmetric.ui \
     ../../symmetric/makesymmetrickey.ui
 
 
 HEADERS += \
     ../../mainwindow.h \
-    ../../symmetric/decryptsymmetric.h \
-    ../../symmetric/encryptsymmetric.h \
     ../../symmetric/encrytpdecryptsymmetric.h \
     ../../symmetric/makesymmetrickey.h
 
