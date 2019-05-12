@@ -16,5 +16,4 @@ add new opportunities;
 test if new version prokect is better then old version;
 
 ## testing both version
---
 ![Alt text](https://i.imgur.com/854EnUz.png)
