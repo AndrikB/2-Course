@@ -1,6 +1,8 @@
-## Synopsis
+# Project Title
 
-This is my first lab in 4 semestr in KNU; 
+This is my first all lab and project in 2 course in KNU; 
+
+#lab4
 
 #part1 
 create uml diagrams for "pikabu.ru" (Visual Paradigm)
